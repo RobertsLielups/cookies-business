@@ -1,4 +1,5 @@
 import { company, navLinks } from '../data/company';
+import NavLink from './NavLink';
 import '../styles/footer.css';
 
 function Footer() {
@@ -18,9 +19,9 @@ function Footer() {
             <ul className="footer__links">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="footer__link">
+                  <NavLink href={link.href} className="footer__link">
                     {link.label}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>

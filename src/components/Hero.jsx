@@ -4,7 +4,7 @@ function Hero() {
   return (
     <section id="home" className="hero">
       <div className="container hero__grid">
-        <div className="hero__content">
+        <div className="hero__content content-panel">
           <span className="hero__label">Family-owned since 1987</span>
           <h1 className="hero__title">
             Cookies crafted with care, baked to perfection
@@ -24,13 +24,7 @@ function Hero() {
           </div>
         </div>
 
-        <div
-          className="hero__image image-placeholder"
-          role="img"
-          aria-label="Assortment of freshly baked cookies"
-        >
-          Cookie Image
-        </div>
+        <div className="hero__visual-space" aria-hidden="true" />
       </div>
     </section>
   );

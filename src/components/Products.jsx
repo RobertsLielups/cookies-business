@@ -6,7 +6,7 @@ function Products() {
   return (
     <section id="products" className="section">
       <div className="container">
-        <header className="section-header">
+        <header className="section-header content-panel section-header--panel">
           <span className="section-label">Our Collection</span>
           <h2 className="section-title">Cookies worth savoring</h2>
           <p className="section-description">

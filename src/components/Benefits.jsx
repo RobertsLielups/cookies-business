@@ -5,7 +5,7 @@ function Benefits() {
   return (
     <section className="section">
       <div className="container">
-        <header className="section-header">
+        <header className="section-header content-panel section-header--panel">
           <span className="section-label">Why Choose Us</span>
           <h2 className="section-title">Quality you can taste in every bite</h2>
           <p className="section-description">

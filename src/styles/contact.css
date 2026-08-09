@@ -1,3 +1,7 @@
+.contact-panel {
+  padding: clamp(2rem, 4vw, 3.5rem);
+}
+
 .contact__grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -31,7 +35,7 @@
   flex-direction: column;
   gap: var(--space-md);
   padding: var(--space-lg);
-  background-color: var(--color-surface);
+  background-color: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
 }

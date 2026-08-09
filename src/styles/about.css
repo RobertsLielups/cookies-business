@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.about__content {
+  padding: clamp(2rem, 4vw, 3.5rem);
+}
+
 .about__story {
   font-size: var(--text-base);
   color: var(--color-text-muted);

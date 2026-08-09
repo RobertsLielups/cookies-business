@@ -1,0 +1,7 @@
+.products-page {
+  padding-top: var(--space-xl);
+}
+
+.products-page .section-header {
+  max-width: 42rem;
+}

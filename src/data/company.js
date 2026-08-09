@@ -1,16 +1,28 @@
 export const company = {
-  name: 'Golden Crumb Bakery',
+  name: 'Cepumbums',
   tagline: 'Handcrafted cookies, baked with love since 1987',
   email: 'hello@goldencrumbbakery.com',
   phone: '(555) 123-4567',
   address: '42 Maple Lane, Portland, OR',
+
+  /**
+   * Company logo — used in the header and as the browser tab favicon.
+   *
+   * How to add your logo:
+   * 1. Put your logo file in the public/ folder (e.g. public/logo.png)
+   * 2. Set logo to the path starting with / (e.g. '/logo.png')
+   *
+   * Supported formats: .png, .svg, .ico, .jpg, .webp
+   * Leave as null to use the default "GC" placeholder.
+   */
+  logo: null,
 };
 
 export const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Products', href: '#products' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export const values = [

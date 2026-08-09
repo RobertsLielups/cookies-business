@@ -1,7 +1,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--layer-header);
   height: var(--header-height);
   background-color: rgba(255, 253, 249, 0.92);
   backdrop-filter: blur(8px);
@@ -35,6 +35,13 @@
   border-radius: 50%;
   font-size: var(--text-sm);
   color: var(--color-accent-dark);
+}
+
+.header__logo-image {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .header__nav {

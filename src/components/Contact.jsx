@@ -12,8 +12,8 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="section section--alt">
-      <div className="container">
+    <section id="contact" className="section">
+      <div className="container content-panel contact-panel">
         <header className="section-header">
           <span className="section-label">Contact</span>
           <h2 className="section-title">We would love to hear from you</h2>

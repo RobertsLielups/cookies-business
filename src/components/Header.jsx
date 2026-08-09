@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { company, navLinks } from '../data/company';
+import NavLink from './NavLink';
 import '../styles/header.css';
 
 function Header() {
@@ -16,12 +18,20 @@ function Header() {
   return (
     <header className="header">
       <div className="container header__inner">
-        <a href="#home" className="header__logo" onClick={closeMenu}>
-          <span className="header__logo-mark" aria-hidden="true">
-            GC
-          </span>
+        <Link to="/" className="header__logo" onClick={closeMenu}>
+          {company.logo ? (
+            <img
+              src={company.logo}
+              alt=""
+              className="header__logo-image"
+            />
+          ) : (
+            <span className="header__logo-mark" aria-hidden="true">
+              GC
+            </span>
+          )}
           {company.name}
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -42,14 +52,14 @@ function Header() {
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
-            <a
+            <NavLink
               key={link.href}
               href={link.href}
               className="header__link"
               onClick={closeMenu}
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
       </div>
