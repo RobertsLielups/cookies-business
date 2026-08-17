@@ -1,7 +1,7 @@
 .footer {
   padding-block: var(--space-xl);
-  background-color: var(--color-text);
-  color: rgba(255, 253, 249, 0.75);
+  background-color: var(--color-coffee);
+  color: var(--color-cream-muted);
 }
 
 .footer__grid {
@@ -14,7 +14,7 @@
   font-family: var(--font-heading);
   font-size: var(--text-xl);
   font-weight: 600;
-  color: var(--color-surface);
+  color: var(--color-cream);
 }
 
 .footer__tagline {
@@ -28,7 +28,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-surface);
+  color: var(--color-cream);
   margin-bottom: var(--space-sm);
 }
 
@@ -45,13 +45,13 @@
 
 .footer__link:hover,
 .footer__link:focus-visible {
-  color: var(--color-surface);
+  color: var(--color-cream);
 }
 
 .footer__bottom {
   margin-top: var(--space-xl);
   padding-top: var(--space-md);
-  border-top: 1px solid rgba(255, 253, 249, 0.12);
+  border-top: 1px solid rgba(247, 241, 232, 0.14);
   font-size: var(--text-sm);
   text-align: center;
 }

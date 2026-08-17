@@ -1,16 +1,10 @@
-function ProductCard({ title, description, badge, imageAlt }) {
+function ProductCard({ name, description, badge, image, imageAlt }) {
   return (
     <article className="product-card">
-      <div
-        className="product-card__image image-placeholder"
-        role="img"
-        aria-label={imageAlt}
-      >
-        {title}
-      </div>
+      <img className="product-card__image" src={image} alt={imageAlt} />
       <div className="product-card__body">
         {badge && <span className="product-card__badge">{badge}</span>}
-        <h3 className="product-card__title">{title}</h3>
+        <h3 className="product-card__title">{name}</h3>
         <p className="product-card__description">{description}</p>
       </div>
     </article>

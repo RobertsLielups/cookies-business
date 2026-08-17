@@ -1,14 +1,17 @@
 :root {
   /* Colors — edit these to retheme the entire site */
-  --color-bg: #f9f7f3;
-  --color-bg-alt: #f3eee7;
-  --color-surface: #ffffff;
-  --color-text: #2b211d;
-  --color-text-muted: #675b53;
-  --color-accent: #966842;
-  --color-accent-dark: #593b29;
-  --color-accent-soft: #efe1d3;
-  --color-border: #e8e1d9;
+  --color-bg: #f6f1ea;
+  --color-bg-alt: #eee5da;
+  --color-surface: #fffdfc;
+  --color-text: #2f241f;
+  --color-text-muted: #75675f;
+  --color-accent: #a86f47;
+  --color-accent-dark: #7e4f31;
+  --color-accent-soft: #f0dfd0;
+  --color-border: #e4d9cf;
+  --color-coffee: #3b2418;
+  --color-cream: #f7f1e8;
+  --color-cream-muted: #dccdc0;
   --color-success: #3d6b4f;
   --color-success-bg: #e8f2ec;
 
@@ -41,8 +44,8 @@
   --radius-lg: 1rem;
 
   /* Shadows */
-  --shadow-soft: 0 0.75rem 2rem rgba(53, 36, 24, 0.045);
-  --shadow-card: 0 1rem 2.5rem rgba(53, 36, 24, 0.06);
+  --shadow-soft: 0 0.75rem 2rem rgba(47, 36, 31, 0.035);
+  --shadow-card: 0 0.75rem 2rem rgba(47, 36, 31, 0.055);
 
   /* Layer order: background, decorative cookie, readable content, navigation. */
   --layer-background: 0;

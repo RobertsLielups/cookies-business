@@ -1,30 +1,25 @@
+import { Link } from 'react-router-dom';
 import '../styles/hero.css';
 
 function Hero() {
   return (
     <section id="home" className="hero">
+      <img
+        className="hero__image"
+        src="/images/hero/Cookies_tower.png"
+        alt="A tower of handmade cookies dusted with sugar"
+      />
       <div className="container hero__grid">
-        <div className="hero__content content-panel">
-          <span className="hero__label">Family-owned since 1987</span>
-          <h1 className="hero__title">
-            Cookies crafted with care, baked to perfection
-          </h1>
+        <div className="hero__content">
+          <h1 className="hero__title">Cepumbums</h1>
           <p className="hero__description">
-            Small-batch cookies made from premium ingredients and recipes
-            passed down through three generations. Taste the difference that
-            handmade quality makes.
+            Handmade cookies,<br />
+            baked with care.
           </p>
-          <div className="hero__actions">
-            <a href="#products" className="btn btn--primary">
-              View Our Cookies
-            </a>
-            <a href="#about" className="btn btn--secondary">
-              Our Story
-            </a>
-          </div>
+          <Link to="/products" className="btn btn--primary hero__cta">
+            Explore our cookies <span aria-hidden="true">→</span>
+          </Link>
         </div>
-
-        <div className="hero__visual-space" aria-hidden="true" />
       </div>
     </section>
   );

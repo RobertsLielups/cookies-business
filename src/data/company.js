@@ -15,7 +15,7 @@ export const company = {
    * Supported formats: .png, .svg, .ico, .jpg, .webp
    * Leave as null to use the default "GC" placeholder.
    */
-  logo: null,
+  logo: '/cepumbums-logo.png',
 };
 
 export const navLinks = [

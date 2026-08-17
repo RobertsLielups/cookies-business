@@ -1,73 +1,89 @@
 .hero {
-  padding-block: clamp(5rem, 10vw, 8rem) clamp(4rem, 8vw, 6rem);
-  min-height: min(47rem, calc(100vh - var(--header-height)));
+  position: relative;
+  isolation: isolate;
+  height: calc(100svh - var(--header-height));
+  min-height: 0;
   display: grid;
   align-items: center;
+  overflow: hidden;
+  background-color: #f7f6f4;
 }
 
 .hero__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
-  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .hero__content {
-  max-width: 32rem;
-  padding: clamp(2rem, 5vw, 4rem);
-}
-
-.hero__label {
-  display: block;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: var(--space-sm);
+  max-width: 28rem;
+  color: var(--color-coffee);
 }
 
 .hero__title {
   font-family: var(--font-heading);
-  font-size: var(--text-4xl);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
   font-weight: 600;
-  line-height: 1.1;
-  color: var(--color-text);
+  letter-spacing: 0.035em;
+  line-height: 0.92;
+  color: inherit;
 }
 
 .hero__description {
   margin-top: var(--space-md);
-  font-size: var(--text-lg);
-  color: var(--color-text-muted);
-  line-height: 1.7;
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: inherit;
 }
 
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+.hero__image {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+}
+
+.hero__cta {
   margin-top: var(--space-lg);
+  background-color: var(--color-accent-dark);
+  color: var(--color-cream);
 }
 
-.hero__visual-space {
-  min-height: 25rem;
+.hero__cta:hover,
+.hero__cta:focus-visible {
+  background-color: var(--color-coffee);
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding-block: var(--space-xl);
-  }
-
-  .hero__grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    height: auto;
+    min-height: clamp(36rem, 145vw, 46rem);
   }
 
   .hero__title {
-    font-size: var(--text-3xl);
+    font-size: clamp(3.125rem, 14vw, 4.75rem);
   }
 
-  .hero__visual-space {
-    display: none;
+  .hero__image {
+    object-fit: cover;
+    object-position: 68% center;
+  }
+
+  .hero__content {
+    max-width: 20rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero {
+    min-height: 38rem;
+  }
+
+  .hero__image {
+    object-position: 64% center;
   }
 }
