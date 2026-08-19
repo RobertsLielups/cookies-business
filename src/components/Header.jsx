@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { company, navLinks } from '../data/company';
 import NavLink from './NavLink';
 import '../styles/header.css';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   function closeMenu() {
     setMenuOpen(false);
@@ -15,10 +16,30 @@ function Header() {
     setMenuOpen((open) => !open);
   }
 
+  function returnHome(event) {
+    closeMenu();
+
+    // React Router does not reset the scroll position when linking to the
+    // current route, so make the brand reliably return to the hero section.
+    if (pathname === '/') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function handleNavigation(href, event) {
+    closeMenu();
+
+    if (href === '/' && pathname === '/') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
   return (
     <header className="header">
       <div className="container header__inner">
-        <Link to="/" className="header__logo" onClick={closeMenu}>
+        <Link to="/" className="header__logo" onClick={returnHome}>
           {company.logo ? (
             <img
               src={company.logo}
@@ -56,7 +77,7 @@ function Header() {
               key={link.href}
               href={link.href}
               className="header__link"
-              onClick={closeMenu}
+              onClick={(event) => handleNavigation(link.href, event)}
             >
               {link.label}
             </NavLink>

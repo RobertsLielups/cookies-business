@@ -12,6 +12,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep linked home-page sections visible below the sticky header. */
+#home,
+#about,
+#contact {
+  scroll-margin-top: var(--header-height);
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -223,5 +230,16 @@ ul {
 
   .section-title {
     font-size: var(--text-2xl);
+  }
+}
+
+/* Home sections sit closer together without affecting the products page. */
+.site-main__content .section {
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+@media (max-width: 768px) {
+  .site-main__content .section {
+    padding-block: 3rem;
   }
 }

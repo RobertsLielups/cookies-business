@@ -65,7 +65,9 @@
   }
 
   .hero__title {
-    font-size: clamp(3.125rem, 14vw, 4.75rem);
+    /* Keep the single-word title inside the clear left-hand area of the image. */
+    font-size: clamp(2.75rem, 11vw, 3.75rem);
+    letter-spacing: 0.02em;
   }
 
   .hero__image {

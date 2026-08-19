@@ -17,7 +17,7 @@ function Hero() {
             baked with care.
           </p>
           <Link to="/products" className="btn btn--primary hero__cta">
-            Explore our cookies <span aria-hidden="true">→</span>
+            Explore our cookies 
           </Link>
         </div>
       </div>
