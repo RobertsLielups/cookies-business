@@ -74,7 +74,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href={`tel:${company.phone.replace(/\D/g, '')}`}
+                  href={`tel:${company.phone.replace(/[^\d+]/g, '')}`}
                   className="footer__link"
                 >
                   {company.phone}

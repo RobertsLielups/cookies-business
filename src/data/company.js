@@ -1,9 +1,9 @@
 export const company = {
   name: 'Cepumbums',
   tagline: 'Handcrafted cookies, baked with love since 1987',
-  email: 'hello@goldencrumbbakery.com',
-  phone: '(555) 123-4567',
-  address: '42 Maple Lane, Portland, OR',
+  email: 'Cepumbums@gmail.com',
+  phone: '+371-29-149-249',
+  address: 'Ozolnieki, Jelgava',
 
   /**
    * Company logo — used in the header and as the browser tab favicon.

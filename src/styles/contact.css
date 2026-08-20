@@ -15,6 +15,16 @@
   gap: var(--space-md);
 }
 
+.contact__header {
+  margin: -1rem 0 0;
+}
+
+.contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
 .contact__detail {
   font-size: var(--text-sm);
   color: var(--color-text-muted);

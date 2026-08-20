@@ -31,6 +31,12 @@
   transform: translateY(-2px);
 }
 
+.product-card:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: var(--shadow-card);
+}
+
 .product-card__image {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -45,18 +51,6 @@
   flex: 1;
   padding: var(--space-md);
   gap: var(--space-xs);
-}
-
-.product-card__badge {
-  align-self: flex-start;
-  padding: 0.25rem 0.625rem;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent-dark);
-  background-color: var(--color-accent-soft);
-  border-radius: var(--radius-sm);
 }
 
 .product-card__title {
