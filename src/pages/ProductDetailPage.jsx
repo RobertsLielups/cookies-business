@@ -1,22 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { allProducts } from '../data/allProducts';
 import '../styles/product-detail.css';
 
-const purchaseOptions = [
-  { value: 'box-6', label: 'Box of 6', description: 'A small box for enjoying now.' },
-  { value: 'box-12', label: 'Box of 12', description: 'A generous box to share.' },
-  { value: 'box-24', label: 'Box of 24', description: 'Our party-size cookie box.' },
-];
-
 function ProductDetailPage() {
   const { productId } = useParams();
   const product = allProducts.find((item) => item.id === productId);
-  const [selectedOption, setSelectedOption] = useState('box-6');
-  const [quantity, setQuantity] = useState(1);
-  const [added, setAdded] = useState(false);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  useEffect(() => {
+    if (!lightboxOpen) return undefined;
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') setLightboxOpen(false);
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen]);
 
   if (!product) {
     return (
@@ -40,9 +44,22 @@ function ProductDetailPage() {
     );
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    setAdded(true);
+  const productImages = product.images ?? [
+    { src: product.image, alt: product.imageAlt },
+  ];
+  const activeImage = productImages[activeImageIndex] ?? productImages[0];
+
+  function showPreviousImage() {
+    setActiveImageIndex(
+      (currentIndex) =>
+        (currentIndex - 1 + productImages.length) % productImages.length,
+    );
+  }
+
+  function showNextImage() {
+    setActiveImageIndex(
+      (currentIndex) => (currentIndex + 1) % productImages.length,
+    );
   }
 
   return (
@@ -55,73 +72,78 @@ function ProductDetailPage() {
               ← Back to all cookies
             </Link>
 
-            <div className="product-detail__grid">
-              <img
-                className="product-detail__image"
-                src={product.image}
-                alt={product.imageAlt}
-              />
+            <div
+              className={`product-detail__grid${product.imageLayout === 'portrait' ? ' product-detail__grid--portrait' : ''}`}
+            >
+              <div
+                className={`product-detail__gallery${product.imageLayout === 'portrait' ? ' product-detail__gallery--portrait' : ''}`}
+              >
+                <button
+                  type="button"
+                  className="product-detail__image-trigger"
+                  onClick={() => setLightboxOpen(true)}
+                  aria-label={`Open ${activeImage.alt} larger`}
+                >
+                  <img
+                    className={`product-detail__image${product.imageLayout === 'portrait' ? ' product-detail__image--portrait' : ''}`}
+                    src={activeImage.src}
+                    alt={activeImage.alt}
+                  />
+                </button>
+                {productImages.length > 1 && (
+                  <div className="product-detail__gallery-controls">
+                    <button
+                      type="button"
+                      className="product-detail__gallery-button"
+                      onClick={showPreviousImage}
+                      aria-label="Show previous photo"
+                    >
+                      ←
+                    </button>
+                    <button
+                      type="button"
+                      className="product-detail__gallery-button"
+                      onClick={showNextImage}
+                      aria-label="Show next photo"
+                    >
+                      →
+                    </button>
+                  </div>
+                )}
+              </div>
 
               <div className="product-detail__content">
                 <h1 className="section-title">{product.name}</h1>
                 <p className="product-detail__description">{product.description}</p>
-
-                <form className="product-detail__purchase" onSubmit={handleSubmit}>
-                  <fieldset>
-                    <legend>Choose your box</legend>
-                    <div className="product-detail__options">
-                      {purchaseOptions.map((option) => (
-                        <label
-                          className="product-detail__option"
-                          key={option.value}
-                        >
-                          <input
-                            type="radio"
-                            name="box-size"
-                            value={option.value}
-                            checked={selectedOption === option.value}
-                            onChange={() => {
-                              setSelectedOption(option.value);
-                              setAdded(false);
-                            }}
-                          />
-                          <span>
-                            <strong>{option.label}</strong>
-                            <small>{option.description}</small>
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </fieldset>
-
-                  <label className="product-detail__quantity" htmlFor="quantity">
-                    Quantity
-                    <input
-                      id="quantity"
-                      type="number"
-                      min="1"
-                      value={quantity}
-                      onChange={(event) => {
-                        setQuantity(Math.max(1, Number(event.target.value) || 1));
-                        setAdded(false);
-                      }}
-                    />
-                  </label>
-
-                  <button type="submit" className="btn btn--primary">
-                    Add to order
-                  </button>
-                  {added && (
-                    <p className="product-detail__confirmation" role="status">
-                      {quantity} {selectedOption.replace('box-', 'box of ')} added to your order.
-                    </p>
-                  )}
-                </form>
               </div>
             </div>
           </div>
         </section>
       </main>
+      {lightboxOpen && (
+        <div
+          className="product-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Expanded product photo"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <div
+            className="product-lightbox__content"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="product-lightbox__close"
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close expanded photo"
+            >
+              ×
+            </button>
+            <img src={activeImage.src} alt={activeImage.alt} />
+          </div>
+        </div>
+      )}
       <Footer />
     </>
   );

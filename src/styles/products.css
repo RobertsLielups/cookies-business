@@ -45,6 +45,10 @@
   background-color: var(--color-bg-alt);
 }
 
+.product-card__image--portrait {
+  aspect-ratio: 2 / 3;
+}
+
 .product-card__body {
   display: flex;
   flex-direction: column;

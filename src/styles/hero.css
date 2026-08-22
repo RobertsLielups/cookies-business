@@ -18,6 +18,8 @@
 .hero__content {
   max-width: 28rem;
   color: var(--color-coffee);
+  /* Optical adjustment: the cookie tower adds visual weight on the right. */
+  transform: translateX(-1.25rem);
 }
 
 .hero__title {
@@ -27,6 +29,10 @@
   letter-spacing: 0.035em;
   line-height: 0.92;
   color: inherit;
+}
+
+.hero__title-break {
+  display: none;
 }
 
 .hero__description {
@@ -70,6 +76,10 @@
     letter-spacing: 0.02em;
   }
 
+  .hero__title-break {
+    display: inline;
+  }
+
   .hero__image {
     object-fit: cover;
     object-position: 68% center;
@@ -77,6 +87,7 @@
 
   .hero__content {
     max-width: 20rem;
+    transform: none;
   }
 }
 

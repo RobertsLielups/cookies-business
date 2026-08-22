@@ -6,6 +6,11 @@ import { company } from './data/company';
 import { setFavicon } from './utils/setFavicon';
 import './styles/global.css';
 
+// Keep navigation consistent: every route starts at its top, including browser Back/Forward.
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
 setFavicon(company.logo);
 
 createRoot(document.getElementById('root')).render(
