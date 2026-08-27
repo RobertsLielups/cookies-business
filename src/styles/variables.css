@@ -1,58 +1,74 @@
 :root {
-  /* Colors — edit these to retheme the entire site */
-  --color-bg: #f6f1ea;
-  --color-bg-alt: #eee5da;
-  --color-surface: #fffdfc;
-  --color-text: #2f241f;
-  --color-text-muted: #75675f;
-  --color-accent: #a86f47;
-  --color-accent-dark: #7e4f31;
-  --color-accent-soft: #f0dfd0;
-  --color-border: #e4d9cf;
-  --color-coffee: #3b2418;
-  --color-cream: #f7f1e8;
-  --color-cream-muted: #dccdc0;
-  --color-success: #3d6b4f;
-  --color-success-bg: #e8f2ec;
+  /* Official Cepumbums identity */
+  --brand-gold: #c7a968;
+  --brand-gold-80: #d3ba81;
+  --brand-gold-60: #dfcb9b;
+  --brand-gold-40: #ecddba;
+  --brand-gold-20: #f7f0e2;
+  --brand-gray: #adafb2;
+  --brand-gray-20: #eff0f1;
 
-  /* Typography */
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  /* Application surfaces */
+  --background-main: #fcfaf6;
+  --background-soft: #f7f0e2;
+  --surface: #fffefa;
+  --surface-muted: #f5f1e9;
+  --text-primary: #282522;
+  --text-secondary: #68655f;
+  --border-color: #e6ddcc;
+  --dark-neutral: #302d28;
+  --success: #35664d;
+  --success-bg: #edf6ef;
 
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-base: 1.0625rem;
-  --text-lg: 1.25rem;
+  --color-bg: var(--background-main);
+  --color-bg-alt: var(--background-soft);
+  --color-surface: var(--surface);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-secondary);
+  --color-accent: var(--brand-gold);
+  --color-accent-dark: #987b3d;
+  --color-accent-soft: var(--brand-gold-20);
+  --color-border: var(--border-color);
+  --color-coffee: var(--dark-neutral);
+  --color-cream: var(--surface);
+  --color-cream-muted: #e8dfce;
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+
+  /* Uses the licensed local system font only; no font files are shipped. */
+  --font-body: 'Avenir Next Condensed', 'Avenir Next', 'Arial Narrow', Arial, sans-serif;
+  --font-heading: 'Avenir Next Condensed', 'Avenir Next', 'Arial Narrow', Arial, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.1875rem;
   --text-xl: 1.5rem;
-  --text-2xl: 2rem;
-  --text-3xl: 2.75rem;
-  --text-4xl: 3.5rem;
+  --text-2xl: clamp(2rem, 3vw, 2.7rem);
+  --text-3xl: clamp(2.5rem, 5vw, 4.4rem);
+  --text-4xl: clamp(3.25rem, 7vw, 6rem);
 
-  /* Spacing */
-  --space-xs: 0.5rem;
+  --space-2xs: 0.375rem;
+  --space-xs: 0.625rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
-  --space-lg: 2.5rem;
-  --space-xl: 4rem;
-  --space-2xl: 6rem;
+  --space-lg: 2.25rem;
+  --space-xl: clamp(3.5rem, 7vw, 6.5rem);
+  --space-2xl: clamp(5rem, 10vw, 9rem);
 
-  /* Layout */
-  --max-width: 72rem;
-  --header-height: 4.5rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
+  --container-max: 76rem;
+  --container-padding: clamp(1.25rem, 3vw, 2.5rem);
+  --section-space: clamp(4.5rem, 8vw, 7.5rem);
+  --header-height: 5.25rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-soft: 0 0.75rem 2rem rgba(48, 45, 40, 0.05);
+  --shadow-card: 0 0.8rem 2rem rgba(48, 45, 40, 0.07);
 
-  /* Shadows */
-  --shadow-soft: 0 0.75rem 2rem rgba(47, 36, 31, 0.035);
-  --shadow-card: 0 0.75rem 2rem rgba(47, 36, 31, 0.055);
-
-  /* Layer order: background, decorative cookie, readable content, navigation. */
   --layer-background: 0;
   --layer-cookie: 1;
   --layer-content: 2;
   --layer-header: 3;
-
-  /* Transitions */
-  --transition: 200ms ease;
+  --transition: 180ms ease;
 }

@@ -43,7 +43,7 @@ function Header() {
           {company.logo ? (
             <img
               src={company.logo}
-              alt=""
+              alt={company.name}
               className="header__logo-image"
             />
           ) : (
@@ -51,7 +51,6 @@ function Header() {
               GC
             </span>
           )}
-          {company.name}
         </Link>
 
         <button

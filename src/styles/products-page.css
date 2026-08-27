@@ -1,7 +1,1 @@
-.products-page.section {
-  padding-top: clamp(2rem, 3vw, 3rem);
-}
-
-.products-page .section-header {
-  max-width: 42rem;
-}
+.products-page.section { padding-top: clamp(2.5rem, 5vw, 4.5rem); }.products-page .section-header { max-width: 43rem; }

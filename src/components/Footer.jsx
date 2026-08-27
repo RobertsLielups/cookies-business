@@ -10,7 +10,7 @@ function Footer() {
       <div className="container">
         <div className="footer__grid">
           <div>
-            <p className="footer__brand">{company.name}</p>
+            {company.logo && <img className="footer__logo" src={company.logo} alt={company.name} />}
             <p className="footer__tagline">{company.tagline}</p>
             <div className="footer__social" aria-label="Follow Cepumbums on social media">
               <a

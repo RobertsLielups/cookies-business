@@ -50,7 +50,7 @@ function Contact() {
                 respond soon.
               </div>
             ) : (
-              <form className="contact__form" onSubmit={handleSubmit} noValidate>
+              <form className="contact__form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label className="form-label" htmlFor="name">
                     Name

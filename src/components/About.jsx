@@ -18,13 +18,10 @@ function About() {
           </div>
         </div>
 
-        <div
-          className="about__image image-placeholder"
-          role="img"
-          aria-label="Family bakers working together in the kitchen"
-        >
-          Family Kitchen
-        </div>
+        <aside className="about__mark" aria-label="Cepumbums family bakery">
+          <img src="/cepumbums-logo-20260827.png" alt="Cepumbums" />
+          <span>Ģimenes konditoreja</span>
+        </aside>
       </div>
     </section>
   );
