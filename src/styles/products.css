@@ -1,4 +1,10 @@
 .products__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); }
+.products__rail-wrap { position: relative; }
+.products__rail-controls { display: flex; justify-content: flex-end; gap: var(--space-xs); margin-bottom: var(--space-md); }
+.products__rail-button { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--brand-gold); border-radius: 50%; color: var(--text-primary); font-size: var(--text-xl); line-height: 1; transition: background-color var(--transition), transform var(--transition); }
+.products__rail-button:hover, .products__rail-button:focus-visible { background: var(--brand-gold-20); transform: translateY(-1px); }
+.products__rail { display: flex; gap: clamp(1rem, 2vw, 1.6rem); overflow-x: auto; padding-bottom: var(--space-sm); scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-color: var(--brand-gold-60) transparent; }
+.products__rail .product-card { flex: 0 0 min(22rem, 78vw); scroll-snap-align: start; }
 .product-card { display: flex; min-width: 0; flex-direction: column; border: 1px solid var(--border-color); background: var(--surface); transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); }
 .product-card:hover { border-color: var(--brand-gold-60); box-shadow: var(--shadow-card); transform: translateY(-3px); }
 .product-card:focus-visible { outline: 3px solid var(--brand-gold); outline-offset: 3px; }

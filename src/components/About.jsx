@@ -5,7 +5,7 @@ function About() {
   return (
     <section id="about" className="section">
       <div className="container about__grid">
-        <div className="about__content content-panel">
+        <div className="about__content">
           <header className="section-header">
             <span className="section-label">About Us</span>
             <h2 className="section-title">{aboutStory.headline}</h2>

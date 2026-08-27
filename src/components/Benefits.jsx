@@ -7,7 +7,6 @@ function Benefits() {
       <div className="container">
         <header className="section-header content-panel section-header--panel">
           <span className="section-label">Why Choose Us</span>
-          <h2 className="section-title">Quality you can taste in every bite</h2>
           <p className="section-description">
             We believe great cookies come from great ingredients, honest
             recipes, and the kind of care only a family business can give.
