@@ -10,7 +10,7 @@ function Hero() {
       <div className="container hero__grid">
         <div className="hero__content">
           <span className="hero__eyebrow">Ģimenes konditoreja</span>
-          <h1 className="hero__title">Handmade cookies</h1>
+          <h1 className="hero__title">CEPUMBUMS</h1>
           <p className="hero__description">
             Baked with care.
           </p>
