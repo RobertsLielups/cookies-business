@@ -5,7 +5,7 @@ function Hero() {
   return (
     <section id="home" className="hero">
       <div className="hero__media" aria-hidden="true">
-        <img className="hero__image" src="/images/hero/cookies-tower-hero.png" alt="" />
+        <img className="hero__image" src="/media/hero/cookies-tower.webp" alt="" />
       </div>
       <div className="container hero__grid">
         <div className="hero__content">

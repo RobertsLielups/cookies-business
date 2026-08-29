@@ -10,9 +10,11 @@
 .header__link:hover::after, .header__link:focus-visible::after { transform: scaleX(1); }
 .header__link[aria-current='page'] { color: var(--text-primary); }
 .header__link[aria-current='page']::after { transform: scaleX(1); }
-.header__toggle { display: none; width: 2.75rem; height: 2.75rem; padding: 0.6rem; }
-.header__toggle-bar { display: block; height: 1px; margin: 0.3rem 0; background: var(--text-primary); transition: transform var(--transition), opacity var(--transition); }
-.header__toggle--open .header__toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.header__toggle { position: relative; display: none; width: 2.75rem; height: 2.75rem; padding: 0; }
+.header__toggle-bar { position: absolute; right: 0.6rem; left: 0.6rem; top: 50%; display: block; height: 1.5px; background: var(--text-primary); transition: transform var(--transition), opacity var(--transition); }
+.header__toggle-bar:nth-child(1) { transform: translateY(-7px); }
+.header__toggle-bar:nth-child(3) { transform: translateY(7px); }
+.header__toggle--open .header__toggle-bar:nth-child(1) { transform: rotate(45deg); }
 .header__toggle--open .header__toggle-bar:nth-child(2) { opacity: 0; }
-.header__toggle--open .header__toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.header__toggle--open .header__toggle-bar:nth-child(3) { transform: rotate(-45deg); }
 @media (max-width: 768px) { .header__toggle { display: block; } .header__nav { position: fixed; top: var(--header-height); right: 0; left: 0; display: grid; gap: 0; padding: var(--space-sm) var(--container-padding) var(--space-md); border-bottom: 1px solid var(--border-color); background: var(--surface); opacity: 0; pointer-events: none; transform: translateY(-110%); transition: transform var(--transition), opacity var(--transition); } .header__nav--open { opacity: 1; pointer-events: auto; transform: translateY(0); } .header__link { padding-block: 0.9rem; border-bottom: 1px solid var(--border-color); } .header__link:last-child { border-bottom: 0; } }

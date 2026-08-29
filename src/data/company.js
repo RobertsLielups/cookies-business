@@ -1,6 +1,6 @@
 export const company = {
   name: 'Cepumbums',
-  tagline: 'Handcrafted cookies, baked with love since 1987',
+  tagline: 'Handcrafted cookies, baked with love since 2012',
   email: 'Cepumbums@gmail.com',
   phone: '+371-29-149-249',
   address: 'Ozolnieki, Jelgava',
@@ -15,7 +15,7 @@ export const company = {
    * Supported formats: .png, .svg, .ico, .jpg, .webp
    * Leave as null to use the default "GC" placeholder.
    */
-  logo: '/cepumbums-logo-20260827.png',
+  logo: '/media/brand/cepumbums-logo.png',
 };
 
 export const navLinks = [

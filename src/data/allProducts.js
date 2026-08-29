@@ -11,16 +11,16 @@ export const allProducts = [
     description:
       'Delicate, cloud-like meringues with a crisp shell and a soft, airy centre.',
     badge: 'Best Seller',
-    image: '/images/products/mandelu-makoni-pack.jpg',
+    image: '/media/products/mandelu-makoni-pack.webp',
     imageAlt: 'Two packages of Mandeļu Mākoņi meringues',
     imageLayout: 'portrait',
     images: [
       {
-        src: '/images/products/mandelu-makoni-pack.jpg',
+        src: '/media/products/mandelu-makoni-pack.webp',
         alt: 'Two packages of Mandeļu Mākoņi meringues',
       },
       {
-        src: '/images/products/mandelu-makoni-meringues.jpg',
+        src: '/media/products/mandelu-makoni-meringues.webp',
         alt: 'A stack of light, airy meringue cookies',
       },
     ],
@@ -31,16 +31,16 @@ export const allProducts = [
     description:
       'Toasted pecans, soft caramel centers, and a whisper of sea salt in every bite.',
     badge: 'Seasonal',
-    image: '/images/products/seklinu-brosas-pack.jpg',
+    image: '/media/products/seklinu-brosas-pack.webp',
     imageAlt: 'Two packages of Sēkliņu Brošas seed crackers',
     imageLayout: 'portrait',
     images: [
       {
-        src: '/images/products/seklinu-brosas-pack.jpg',
+        src: '/media/products/seklinu-brosas-pack.webp',
         alt: 'Two packages of Sēkliņu Brošas seed crackers',
       },
       {
-        src: '/images/products/seklinu-brosas-stack.jpg',
+        src: '/media/products/seklinu-brosas-stack.webp',
         alt: 'A stack of Sēkliņu Brošas seed crackers',
       },
     ],
@@ -51,16 +51,16 @@ export const allProducts = [
     description:
       'Deep cocoa flavor with melted dark chocolate chunks for true chocolate lovers.',
     badge: 'New',
-    image: '/images/products/griku-pogas-pack.jpg',
+    image: '/media/products/griku-pogas-pack.webp',
     imageAlt: 'Two packages of Griķu Pogas cookies',
     imageLayout: 'portrait',
     images: [
       {
-        src: '/images/products/griku-pogas-pack.jpg',
+        src: '/media/products/griku-pogas-pack.webp',
         alt: 'Two packages of Griķu Pogas cookies',
       },
       {
-        src: '/images/products/griku-pogas-stack.jpg',
+        src: '/media/products/griku-pogas-stack.webp',
         alt: 'A stack of Griķu Pogas cookies dusted with sugar',
       },
     ],
@@ -71,16 +71,16 @@ export const allProducts = [
     description:
       'Delicate shortbread infused with bright lemon zest and fragrant lavender.',
     badge: 'Limited',
-    image: '/images/products/mandelu-makoni-mazie-pack.jpg',
+    image: '/media/products/mandelu-makoni-mazie-pack.webp',
     imageAlt: 'Two packages of Mandeļu Mākoņi cookies',
     imageLayout: 'portrait',
     images: [
       {
-        src: '/images/products/mandelu-makoni-mazie-pack.jpg',
+        src: '/media/products/mandelu-makoni-mazie-pack.webp',
         alt: 'Two packages of Mandeļu Mākoņi cookies',
       },
       {
-        src: '/images/products/mandelu-makoni-mazie-stack.jpg',
+        src: '/media/products/mandelu-makoni-mazie-stack.webp',
         alt: 'A stack of small Mandeļu Mākoņi meringues',
       },
     ],
@@ -91,16 +91,16 @@ export const allProducts = [
     description:
       'Hearty rolled oats, plump raisins, and toasted walnuts in a warmly spiced dough.',
     badge: 'Classic',
-    image: '/images/products/kokosa-bucas-pack.jpg',
+    image: '/media/products/kokosa-bucas-pack.webp',
     imageAlt: 'Two packages of Kokosa Bučas coconut cookies',
     imageLayout: 'portrait',
     images: [
       {
-        src: '/images/products/kokosa-bucas-pack.jpg',
+        src: '/media/products/kokosa-bucas-pack.webp',
         alt: 'Two packages of Kokosa Bučas coconut cookies',
       },
       {
-        src: '/images/products/kokosa-bucas-stack.jpg',
+        src: '/media/products/kokosa-bucas-stack.webp',
         alt: 'A stack of Kokosa Bučas coconut cookies',
       },
     ],
@@ -111,16 +111,16 @@ export const allProducts = [
     description:
       'Soft, pillowy cookies rolled in cinnamon sugar with a tender, crackled top.',
     badge: 'Fan Favorite',
-    image: '/images/products/auzu-cidoniju-pack.jpg',
+    image: '/media/products/auzu-cidoniju-pack.webp',
     imageAlt: 'Two packages of Auzu-Cidoniju cookies',
     imageLayout: 'portrait',
     images: [
       {
-        src: '/images/products/auzu-cidoniju-pack.jpg',
+        src: '/media/products/auzu-cidoniju-pack.webp',
         alt: 'Two packages of Auzu-Cidoniju cookies',
       },
       {
-        src: '/images/products/auzu-cidoniju-stack.jpg',
+        src: '/media/products/auzu-cidoniju-stack.webp',
         alt: 'A stack of Auzu-Cidoniju cookies',
       },
     ],
@@ -131,15 +131,15 @@ export const allProducts = [
     description:
       'Creamy peanut butter dough studded with milk chocolate chips and a pinch of sea salt.',
     badge: null,
-    image: '/images/products/vegrauzis-pack.jpg',
+    image: '/media/products/vegrauzis-pack.webp',
     imageAlt: 'Packaged VEGrauzis cookie',
     images: [
       {
-        src: '/images/products/vegrauzis-pack.jpg',
+        src: '/media/products/vegrauzis-pack.webp',
         alt: 'Packaged VEGrauzis cookie',
       },
       {
-        src: '/images/products/vegrauzis-cookie.jpg',
+        src: '/media/products/vegrauzis-cookie.webp',
         alt: 'A close-up of a VEGrauzis cookie',
       },
     ],
@@ -150,15 +150,15 @@ export const allProducts = [
     description:
       'Buttery cookies loaded with creamy white chocolate and crunchy macadamia nuts.',
     badge: null,
-    image: '/images/products/lielais-seklu-pack.jpg',
+    image: '/media/products/lielais-seklu-pack.webp',
     imageAlt: 'Packaged Lielais Sēklu cookie',
     images: [
       {
-        src: '/images/products/lielais-seklu-pack.jpg',
+        src: '/media/products/lielais-seklu-pack.webp',
         alt: 'Packaged Lielais Sēklu cookie',
       },
       {
-        src: '/images/products/lielais-seklu-cookie.jpg',
+        src: '/media/products/lielais-seklu-cookie.webp',
         alt: 'A close-up of a Lielais Sēklu cookie',
       },
     ],
@@ -169,15 +169,15 @@ export const allProducts = [
     description:
       'Warm molasses, ginger, and cinnamon baked into a soft cookie with a gentle crunch.',
     badge: 'Seasonal',
-    image: '/images/products/kokoscitrons-pack.jpg',
+    image: '/media/products/kokoscitrons-pack.webp',
     imageAlt: 'Packaged Kokoscitrons cookie',
     images: [
       {
-        src: '/images/products/kokoscitrons-pack.jpg',
+        src: '/media/products/kokoscitrons-pack.webp',
         alt: 'Packaged Kokoscitrons cookie',
       },
       {
-        src: '/images/products/kokoscitrons-cookie.jpg',
+        src: '/media/products/kokoscitrons-cookie.webp',
         alt: 'A close-up of a Kokoscitrons cookie',
       },
     ],

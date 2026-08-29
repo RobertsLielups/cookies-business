@@ -7,4 +7,8 @@
 .contact__detail strong { display: block; margin-bottom: var(--space-2xs); color: var(--brand-gold); font-size: var(--text-xs); letter-spacing: 0.13em; text-transform: uppercase; }
 .contact__detail a:hover { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--brand-gold); text-underline-offset: 0.2em; }
 .contact__form { display: grid; gap: var(--space-md); padding: clamp(1.25rem, 3vw, 2.25rem); border: 1px solid var(--border-color); background: var(--surface-muted); }
+.contact__honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.contact__error { color: #9d3028; font-size: var(--text-sm); font-weight: 600; }
+.contact__privacy { color: var(--text-secondary); font-size: var(--text-xs); line-height: 1.5; }
+.contact__form .btn:disabled { cursor: wait; opacity: 0.65; transform: none; }
 @media (max-width: 768px) { .contact__grid { grid-template-columns: 1fr; } }

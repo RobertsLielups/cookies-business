@@ -3,12 +3,43 @@ import { company } from '../data/company';
 import '../styles/contact.css';
 
 function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
-    event.target.reset();
+    if (status === 'submitting') return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      website: formData.get('website'),
+    };
+
+    setStatus('submitting');
+    setError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.error || 'Something went wrong. Please try again.');
+      }
+
+      form.reset();
+      setStatus('success');
+    } catch (submissionError) {
+      setError(submissionError.message || 'Something went wrong. Please try again.');
+      setStatus('error');
+    }
   }
 
   return (
@@ -44,10 +75,9 @@ function Contact() {
               </div>
             </div>
 
-            {submitted ? (
-              <div className="form-success" role="status">
-                Thank you for reaching out! We have received your message and will
-                respond soon.
+            {status === 'success' ? (
+              <div className="form-success" role="status" aria-live="polite">
+                Thank you! Your message has been sent.
               </div>
             ) : (
               <form className="contact__form" onSubmit={handleSubmit}>
@@ -91,9 +121,21 @@ function Contact() {
                   />
                 </div>
 
-                <button type="submit" className="btn btn--primary">
-                  Send Message
+                <div className="contact__honeypot" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input id="website" name="website" type="text" tabIndex="-1" autoComplete="off" />
+                </div>
+
+                {status === 'error' && (
+                  <p className="contact__error" role="alert" aria-live="assertive">
+                    {error}
+                  </p>
+                )}
+
+                <button type="submit" className="btn btn--primary" disabled={status === 'submitting'}>
+                  {status === 'submitting' ? 'Sending...' : 'Send Message'}
                 </button>
+                <p className="contact__privacy">Your details will only be used to respond to your message.</p>
               </form>
             )}
           </div>
