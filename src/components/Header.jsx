@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { company, navLinks } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 import NavLink from './NavLink';
 import '../styles/header.css';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   function closeMenu() {
     setMenuOpen(false);
@@ -58,7 +60,7 @@ function Header() {
           className={`header__toggle ${menuOpen ? 'header__toggle--open' : ''}`}
           aria-expanded={menuOpen}
           aria-controls="main-navigation"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={menuOpen ? t('common.closeMenu') : t('common.openMenu')}
           onClick={toggleMenu}
         >
           <span className="header__toggle-bar" />
@@ -69,7 +71,7 @@ function Header() {
         <nav
           id="main-navigation"
           className={`header__nav ${menuOpen ? 'header__nav--open' : ''}`}
-          aria-label="Main navigation"
+          aria-label={t('navigation.label')}
         >
           {navLinks.map((link) => (
             <NavLink
@@ -78,9 +80,25 @@ function Header() {
               className="header__link"
               onClick={(event) => handleNavigation(link.href, event)}
             >
-              {link.label}
+              {t(`navigation.${link.key}`)}
             </NavLink>
           ))}
+          <div className="language-switcher" role="group" aria-label={t('common.languageSwitcher')}>
+            {['en', 'lv'].map((languageCode) => (
+              <button
+                key={languageCode}
+                type="button"
+                className={`language-switcher__button${language === languageCode ? ' language-switcher__button--active' : ''}`}
+                aria-pressed={language === languageCode}
+                onClick={() => {
+                  setLanguage(languageCode);
+                  closeMenu();
+                }}
+              >
+                {languageCode.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </nav>
       </div>
     </header>

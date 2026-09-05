@@ -1,15 +1,16 @@
-import { benefits } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 import '../styles/benefits.css';
 
 function Benefits() {
+  const { t } = useLanguage();
+  const benefits = t('benefits.items');
   return (
     <section className="section">
       <div className="container">
         <header className="section-header content-panel section-header--panel">
-          <span className="section-label">Why Choose Us</span>
+          <span className="section-label">{t('benefits.label')}</span>
           <p className="section-description">
-            We believe great cookies come from great ingredients, honest
-            recipes, and the kind of care only a family business can give.
+            {t('benefits.description')}
           </p>
         </header>
 

@@ -1,10 +1,11 @@
+import { getProductDetails } from './productDetails.js';
+
 /**
  * Full product catalog for the Products page.
  *
- * Phase 2: Replace with Shopify Storefront API data.
  * The homepage uses src/data/products.js (featured selection only).
  */
-export const allProducts = [
+const productCatalog = [
   {
     id: 'Mandeļu Mākoņi',
     name: 'Mandeļu Mākoņi',
@@ -183,3 +184,27 @@ export const allProducts = [
     ],
   },
   ];
+
+export const allProducts = productCatalog;
+
+export function getLocalizedProduct(product, language) {
+  const details = getProductDetails(product.id);
+  const isUnverifiedDescription = /incorrect placeholder|unverified|missing/i.test(
+    details?.descriptionReviewStatus ?? '',
+  );
+  const content = product.content?.[language] ?? product.content?.en;
+
+  return {
+    ...product,
+    ...content,
+    description: isUnverifiedDescription
+      ? ''
+      : (content?.description ?? (language === 'en' ? product.description : '')),
+    imageAlt: content?.imageAlt ?? product.imageAlt,
+    images: product.images.map((image) => ({
+      ...image,
+      alt: typeof image.alt === 'object' ? (image.alt[language] ?? image.alt.en) : image.alt,
+    })),
+    details,
+  };
+}

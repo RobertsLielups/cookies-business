@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { aboutStory } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 import '../styles/about.css';
 
 const marketPhotos = [
@@ -20,6 +20,8 @@ function About() {
   const marketVideoRef = useRef(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const { t } = useLanguage();
+  const aboutStory = { headline: t('about.headline'), paragraphs: t('about.paragraphs') };
 
   const scrollGallery = (direction) => {
     galleryRef.current?.scrollBy({
@@ -52,7 +54,7 @@ function About() {
       <div className="container about__grid">
         <div className="about__content">
           <header className="section-header">
-            <span className="section-label">About Us</span>
+            <span className="section-label">{t('about.label')}</span>
             <h2 className="section-title">{aboutStory.headline}</h2>
           </header>
 
@@ -64,16 +66,16 @@ function About() {
 
         </div>
 
-        <aside className="about__markets" aria-label="Cepumbums at local markets and fairs">
+        <aside className="about__markets" aria-label={t('about.marketsRegion')}>
           <div className="about__markets-heading">
             <div>
-              <span className="section-label">Meet us in person</span>
-              <h3>Local markets &amp; fairs</h3>
-              <p>We are also selling our products at local markets and fairs.</p>
+              <span className="section-label">{t('about.marketsLabel')}</span>
+              <h3>{t('about.marketsTitle')}</h3>
+              <p>{t('about.marketsDescription')}</p>
             </div>
-            <div className="about__gallery-controls" aria-label="Market gallery controls">
-              <button type="button" onClick={() => scrollGallery(-1)} aria-label="Show previous market photos">←</button>
-              <button type="button" onClick={() => scrollGallery(1)} aria-label="Show next market photos">→</button>
+            <div className="about__gallery-controls" aria-label={t('about.galleryControls')}>
+              <button type="button" onClick={() => scrollGallery(-1)} aria-label={t('about.previousPhotos')}>←</button>
+              <button type="button" onClick={() => scrollGallery(1)} aria-label={t('about.nextPhotos')}>→</button>
             </div>
           </div>
 
@@ -90,14 +92,14 @@ function About() {
                 onPause={() => setIsVideoPlaying(false)}
               />
                 <div className="about__video-controls">
-                  <button type="button" onClick={toggleVideoPlayback} aria-label={isVideoPlaying ? 'Pause video' : 'Play video'}>
+                  <button type="button" onClick={toggleVideoPlayback} aria-label={isVideoPlaying ? t('about.pauseVideo') : t('about.playVideo')}>
                     {isVideoPlaying ? (
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M17 5v14" /></svg>
                     ) : (
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z" /></svg>
                     )}
                   </button>
-                  <button type="button" onClick={toggleVideoSound} aria-label={isMuted ? 'Turn sound on' : 'Turn sound off'}>
+                  <button type="button" onClick={toggleVideoSound} aria-label={isMuted ? t('about.soundOn') : t('about.soundOff')}>
                     {isMuted ? (
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Zm12.5 1.5 4 4m0-4-4 4" /></svg>
                     ) : (
@@ -108,7 +110,7 @@ function About() {
             </article>
             {marketPhotos.map((photo, index) => (
               <figure className="about__market-card" key={photo}>
-                <img src={photo} alt={`Cepumbums at a local market, photo ${index + 1}`} loading="lazy" />
+                <img src={photo} alt={t('about.marketPhoto', { number: index + 1 })} loading="lazy" />
               </figure>
             ))}
           </div>

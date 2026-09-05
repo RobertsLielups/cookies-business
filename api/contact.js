@@ -26,31 +26,31 @@ function validateContactForm(body) {
   const { name, email, message, website } = body;
 
   if (typeof name !== 'string' || !name.trim()) {
-    return { error: 'Please enter your name.' };
+    return { errorCode: 'nameRequired' };
   }
 
   if (name.trim().length > MAX_NAME_LENGTH) {
-    return { error: 'Your name is too long.' };
+    return { errorCode: 'nameTooLong' };
   }
 
   if (typeof email !== 'string' || !email.trim() || email.trim().length > MAX_EMAIL_LENGTH || !EMAIL_PATTERN.test(email.trim())) {
-    return { error: 'Please enter a valid email address.' };
+    return { errorCode: 'emailInvalid' };
   }
 
   if (typeof message !== 'string' || !message.trim()) {
-    return { error: 'Please enter a message.' };
+    return { errorCode: 'messageRequired' };
   }
 
   if (message.trim().length < MIN_MESSAGE_LENGTH) {
-    return { error: 'Your message is too short.' };
+    return { errorCode: 'messageTooShort' };
   }
 
   if (message.trim().length > MAX_MESSAGE_LENGTH) {
-    return { error: 'Your message is too long.' };
+    return { errorCode: 'messageTooLong' };
   }
 
   if (typeof website !== 'undefined' && typeof website !== 'string') {
-    return { error: 'Invalid form submission.' };
+    return { errorCode: 'invalidSubmission' };
   }
 
   return {
@@ -66,17 +66,17 @@ function validateContactForm(body) {
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
-    return sendJson(response, 405, { success: false, error: 'Method not allowed.' });
+    return sendJson(response, 405, { success: false, errorCode: 'methodNotAllowed' });
   }
 
   const body = parseBody(request.body);
   if (!body) {
-    return sendJson(response, 400, { success: false, error: 'Invalid request body.' });
+    return sendJson(response, 400, { success: false, errorCode: 'requestInvalid' });
   }
 
   const validation = validateContactForm(body);
-  if (validation.error) {
-    return sendJson(response, 400, { success: false, error: validation.error });
+  if (validation.errorCode) {
+    return sendJson(response, 400, { success: false, errorCode: validation.errorCode });
   }
 
   const { name, email, message, website } = validation.value;
@@ -89,7 +89,7 @@ export default async function handler(request, response) {
   const { RESEND_API_KEY, CONTACT_EMAIL, CONTACT_FROM_EMAIL } = process.env;
   if (!RESEND_API_KEY || !CONTACT_EMAIL || !CONTACT_FROM_EMAIL) {
     console.error('Contact email configuration is missing.');
-    return sendJson(response, 500, { success: false, error: 'Unable to send your message right now. Please try again later.' });
+    return sendJson(response, 500, { success: false, errorCode: 'serviceUnavailable' });
   }
 
   const resend = new Resend(RESEND_API_KEY);
@@ -106,12 +106,12 @@ export default async function handler(request, response) {
     });
   } catch {
     console.error('Contact email delivery failed.');
-    return sendJson(response, 502, { success: false, error: 'Unable to send your message right now. Please try again later.' });
+    return sendJson(response, 502, { success: false, errorCode: 'serviceUnavailable' });
   }
 
   if (mainEmail.error || !mainEmail.data) {
     console.error('Contact email delivery failed.');
-    return sendJson(response, 502, { success: false, error: 'Unable to send your message right now. Please try again later.' });
+    return sendJson(response, 502, { success: false, errorCode: 'serviceUnavailable' });
   }
 
   try {

@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import { company } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 import '../styles/contact.css';
 
 function Contact() {
   const [status, setStatus] = useState('idle');
-  const [error, setError] = useState('');
+  const [errorKey, setErrorKey] = useState('');
+  const { t } = useLanguage();
+
+  function validateField(event, errorKey) {
+    event.currentTarget.setCustomValidity(t(errorKey));
+  }
+
+  function clearFieldValidation(event) {
+    event.currentTarget.setCustomValidity('');
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,7 +30,7 @@ function Contact() {
     };
 
     setStatus('submitting');
-    setError('');
+    setErrorKey('');
 
     try {
       const response = await fetch('/api/contact', {
@@ -31,13 +41,15 @@ function Contact() {
       const result = await response.json().catch(() => null);
 
       if (!response.ok || !result?.success) {
-        throw new Error(result?.error || 'Something went wrong. Please try again.');
+        setErrorKey(result?.errorCode ? `errors.${result.errorCode}` : 'contact.fallbackError');
+        setStatus('error');
+        return;
       }
 
       form.reset();
       setStatus('success');
-    } catch (submissionError) {
-      setError(submissionError.message || 'Something went wrong. Please try again.');
+    } catch {
+      setErrorKey('contact.fallbackError');
       setStatus('error');
     }
   }
@@ -49,27 +61,26 @@ function Contact() {
           <div className="contact__grid">
             <div className="contact__info">
               <header className="section-header contact__header">
-                <span className="section-label">Contact</span>
-                <h2 className="section-title">We would love to hear from you</h2>
+                <span className="section-label">{t('contact.label')}</span>
+                <h2 className="section-title">{t('contact.title')}</h2>
                 <p className="section-description">
-                  Questions about our cookies, custom orders, or wholesale? Send us
-                  a message and we will get back to you within one business day.
+                  {t('contact.description')}
                 </p>
               </header>
 
               <div className="contact__details">
                 <div className="contact__detail">
-                  <strong>Email</strong>
+                  <strong>{t('common.email')}</strong>
                   <a href={`mailto:${company.email}`}>{company.email}</a>
                 </div>
                 <div className="contact__detail">
-                  <strong>Phone</strong>
+                  <strong>{t('common.phone')}</strong>
                   <a href={`tel:${company.phone.replace(/[^\d+]/g, '')}`}>
                     {company.phone}
                   </a>
                 </div>
                 <div className="contact__detail">
-                  <strong>Location</strong>
+                  <strong>{t('common.location')}</strong>
                   {company.address}
                 </div>
               </div>
@@ -77,13 +88,13 @@ function Contact() {
 
             {status === 'success' ? (
               <div className="form-success" role="status" aria-live="polite">
-                Thank you! Your message has been sent.
+                {t('contact.success')}
               </div>
             ) : (
               <form className="contact__form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label className="form-label" htmlFor="name">
-                    Name
+                    {t('common.name')}
                   </label>
                   <input
                     className="form-input"
@@ -92,12 +103,15 @@ function Contact() {
                     name="name"
                     required
                     autoComplete="name"
+                    placeholder={t('contact.namePlaceholder')}
+                    onInvalid={(event) => validateField(event, 'errors.nameRequired')}
+                    onInput={clearFieldValidation}
                   />
                 </div>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="email">
-                    Email
+                    {t('common.email')}
                   </label>
                   <input
                     className="form-input"
@@ -106,36 +120,42 @@ function Contact() {
                     name="email"
                     required
                     autoComplete="email"
+                    placeholder={t('contact.emailPlaceholder')}
+                    onInvalid={(event) => validateField(event, 'errors.emailInvalid')}
+                    onInput={clearFieldValidation}
                   />
                 </div>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="message">
-                    Message
+                    {t('common.message')}
                   </label>
                   <textarea
                     className="form-textarea"
                     id="message"
                     name="message"
                     required
+                    placeholder={t('contact.messagePlaceholder')}
+                    onInvalid={(event) => validateField(event, 'errors.messageRequired')}
+                    onInput={clearFieldValidation}
                   />
                 </div>
 
                 <div className="contact__honeypot" aria-hidden="true">
-                  <label htmlFor="website">Website</label>
+                  <label htmlFor="website" lang="en">Website</label>
                   <input id="website" name="website" type="text" tabIndex="-1" autoComplete="off" />
                 </div>
 
                 {status === 'error' && (
                   <p className="contact__error" role="alert" aria-live="assertive">
-                    {error}
+                    {t(errorKey)}
                   </p>
                 )}
 
                 <button type="submit" className="btn btn--primary" disabled={status === 'submitting'}>
-                  {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                  {status === 'submitting' ? t('common.sending') : t('common.sendMessage')}
                 </button>
-                <p className="contact__privacy">Your details will only be used to respond to your message.</p>
+                <p className="contact__privacy">{t('contact.privacy')}</p>
               </form>
             )}
           </div>
