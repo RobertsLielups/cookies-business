@@ -1,19 +1,35 @@
-.hero { position: relative; min-height: calc(100svh - var(--header-height)); overflow: hidden; background: #fff; }
-.hero__media { position: absolute; inset: 0; }
-.hero__image { width: 100%; height: 100%; object-fit: contain; object-position: right center; transform: translateX(6%); }
-.hero__grid { position: relative; z-index: 1; display: grid; min-height: inherit; align-items: center; }
-.hero__content { display: flex; width: min(100%, 42rem); flex-direction: column; align-items: flex-start; margin-left: clamp(-1.25rem, -3vw, -3rem); padding-block: clamp(4rem, 9vw, 8rem); }
+/* Hero = the full small viewport INCLUDING the fixed blurred header; header clearance is reserved inside. */
+.hero { position: relative; box-sizing: border-box; min-height: 100svh; padding-top: var(--header-height); padding-bottom: env(safe-area-inset-bottom); overflow: hidden; background: #eeebe9; }
+.hero__stage { position: static; }
+/* The media box IS the clip: 16:9, as large as fits the viewport, vertically centred, right edge pushed --clip-x past
+   the hero's right edge (the clip's right 15% is empty backdrop), so the edge fade tracks the clip at any aspect.
+   ponytail: box derives from 100svh, not the hero's real height; if content ever makes the hero taller, measure it in JS. */
+.hero { --clip-w: min(100%, calc(100svh * 16 / 9)); --clip-x: -6vw; }
+/* Letterbox/pillarbox fill, blurred: the empty-table still tiled vertically at the clip's exact scale and alignment (its
+   top and bottom edges are the same colour, so seams vanish), over a flat colour matching the still's near-white left
+   edge for the pillarbox. The 3rem overhang keeps the blur's soft edge outside the hero; the maths compensate for it. */
+.hero::before { content: ''; position: absolute; inset: -3rem; z-index: 0; background: url(/media/hero/tower-desktop-empty.webp) right calc(3rem + var(--clip-x)) center / min(calc(100% - 6rem), calc(100svh * 16 / 9)) auto repeat-y #fdfbf8; filter: blur(2.5rem); }
+.hero__media { position: absolute; top: 50%; right: var(--clip-x); z-index: 1; width: var(--clip-w); height: auto; aspect-ratio: 16 / 9; transform: translateY(-50%); object-fit: cover;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 96%, transparent), linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 96%, transparent), linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-composite: intersect; }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; min-height: calc(100svh - var(--header-height)); }
+.hero__content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; padding-block: clamp(2rem, 6vw, 5rem); }
 .hero__eyebrow { margin-bottom: var(--space-md); color: var(--brand-gold); font-size: var(--text-xs); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .hero__title { color: var(--text-primary); font-family: var(--font-heading); font-size: clamp(5rem, 9vw, 9.5rem); font-weight: 700; letter-spacing: -.075em; line-height: .78; text-transform: uppercase; }
 .hero__description { max-width: 17rem; margin-top: var(--space-lg); color: var(--text-secondary); font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.3; }
-.hero__cta { margin-top: var(--space-lg); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-lg); }
+.hero__reveal { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s cubic-bezier(.2, .7, .2, 1); }
+.hero__reveal.is-in { opacity: 1; transform: none; }
 @media (max-width: 768px) {
-  .hero { min-height: calc(100svh - var(--header-height)); }
-  .hero__media { top: 21rem; }
-  .hero__image { object-fit: cover; object-position: 72% center; transform: none; }
-  .hero__grid { align-items: start; }
-  .hero__content { width: min(100%, 23rem); margin-left: clamp(-.5rem, -2vw, -1rem); padding-block: 2.75rem; }
-  .hero__title { font-size: clamp(4.5rem, 20vw, 6.5rem); letter-spacing: -.09em; }
+  /* Copy at the top over the blurred fill; the 16:9 clip sits in the bottom 62%, cropped to keep the tower centred, under a scrim that fades out. */
+  .hero__grid { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); align-items: start; }
+  .hero__content { width: min(100%, 23rem); padding-block: 1.5rem .5rem; }
+  .hero__title { font-size: clamp(3.5rem, 18.5vw, 6.5rem); letter-spacing: -.09em; }
   .hero__description { margin-top: var(--space-sm); }
-  .hero__cta { margin-top: var(--space-md); }
+  .hero__actions { margin-top: var(--space-md); }
+  .hero__media { top: auto; right: 0; bottom: 0; width: 100%; height: 62%; aspect-ratio: auto; transform: none; object-position: 82% 100%; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%); mask-image: linear-gradient(to bottom, transparent, #000 15%); }
+  .hero::after { content: ''; position: absolute; inset: 0; z-index: 1; background: rgba(238, 235, 233, .55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 65%); mask-image: linear-gradient(to bottom, #000 35%, transparent 65%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__reveal { opacity: 1; transform: none; transition: none; }
 }

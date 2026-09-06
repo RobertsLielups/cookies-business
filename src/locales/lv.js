@@ -24,7 +24,7 @@ const lv = {
     description: 'Roku darbs cepumi no augstvērtīgām sastāvdaļām un ģimenes receptēm.',
   },
   homepage: {
-    heroEyebrow: 'Ģimenes konditoreja', heroDescription: 'Cepti ar rūpēm.', heroCta: 'Apskatīt cepumus', collectionLabel: 'Mūsu kolekcija', collectionTitle: 'Cepumi, ko baudīt nesteidzoties', collectionDescription: 'Katru garšu cepam nelielās partijās, izmantojot īstu sviestu, augstvērtīgu šokolādi un pacietību, ko sniedz tikai ģimenes virtuve.', carouselControls: 'Produktu karuseļa vadība', previousCookies: 'Rādīt iepriekšējos cepumus', nextCookies: 'Rādīt vairāk cepumu', featuredCookies: 'Izceltie cepumi',
+    heroEyebrow: 'Ģimenes konditoreja', heroDescription: 'Cepti ar rūpēm.', heroCta: 'Apskatīt cepumus', heroContact: 'Sazināties', collectionLabel: 'Mūsu kolekcija', collectionTitle: 'Cepumi, ko baudīt nesteidzoties', collectionDescription: 'Katru garšu cepam nelielās partijās, izmantojot īstu sviestu, augstvērtīgu šokolādi un pacietību, ko sniedz tikai ģimenes virtuve.', carouselControls: 'Produktu karuseļa vadība', previousCookies: 'Rādīt iepriekšējos cepumus', nextCookies: 'Rādīt vairāk cepumu', featuredCookies: 'Izceltie cepumi',
   },
   benefits: {
     label: 'Kāpēc izvēlēties mūs', description: 'Mēs ticam, ka lieliski cepumi rodas no labām sastāvdaļām, godīgām receptēm un rūpēm, ko spēj sniegt tikai ģimenes uzņēmums.',
@@ -44,7 +44,7 @@ const lv = {
       '2012. gadā savu ceļu sāka mūsu ģimenes uzņēmums SIA “Eiras”. Kopš tā laika esam auguši un mainījušies, bet viena lieta ir palikusi nemainīga — vēlme radīt ar rūpēm, mīlestību un patiesu prieku par savu darbu.',
       'Mums cepšana vienmēr ir bijusi kas vairāk par saldumu. Tā ir māju sajūta, mīļas atmiņas un mazi mirkļi, ar kuriem dalīties.',
     ],
-    marketsLabel: 'Satiec mūs klātienē', marketsTitle: 'Vietējie tirdziņi un gadatirgi', marketsDescription: 'Mūsu produktus var atrast arī vietējos tirdziņos un gadatirgos.', marketsRegion: 'Cepumbums vietējos tirdziņos un gadatirgos', galleryControls: 'Tirdziņa galerijas vadība', previousPhotos: 'Rādīt iepriekšējos tirdziņa fotoattēlus', nextPhotos: 'Rādīt nākamos tirdziņa fotoattēlus', pauseVideo: 'Pauzēt video', playVideo: 'Atskaņot video', soundOn: 'Ieslēgt skaņu', soundOff: 'Izslēgt skaņu', marketPhoto: 'Cepumbums vietējā tirdziņā, foto {number}',
+    marketsRegion: 'Cepumbums vietējos tirdziņos un gadatirgos', previousPhotos: 'Rādīt iepriekšējos tirdziņa fotoattēlus', nextPhotos: 'Rādīt nākamos tirdziņa fotoattēlus', soundOn: 'Ieslēgt skaņu', soundOff: 'Izslēgt skaņu', marketPhoto: 'Cepumbums vietējā tirdziņā, foto {number}',
   },
   contact: {
     label: 'Kontakti',
