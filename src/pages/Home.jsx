@@ -1,5 +1,5 @@
 import Header from '../components/Header';
-import Hero from '../components/Hero';
+import Hero from '../components/HeroPrototype'; // PROTOTYPE: swap back to './Hero' when done
 import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 function Home() {
   return (
     <>
-      <Header />
+      <Header overlay />
       <main className="site-main">
         <div className="site-main__content">
           <Hero />
