@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import '../styles/about.css';
 
@@ -18,15 +18,27 @@ const marketVideo = '/media/video/local-markets.mp4';
 function About() {
   const galleryRef = useRef(null);
   const marketVideoRef = useRef(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const { t } = useLanguage();
   const aboutStory = { headline: t('about.headline'), paragraphs: t('about.paragraphs') };
 
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const video = marketVideoRef.current;
+    const updatePlayback = () => {
+      if (preference.matches) video?.pause();
+      else video?.play().catch(() => setIsVideoPlaying(false));
+    };
+    updatePlayback();
+    preference.addEventListener('change', updatePlayback);
+    return () => preference.removeEventListener('change', updatePlayback);
+  }, []);
+
   const scrollGallery = (direction) => {
     galleryRef.current?.scrollBy({
       left: direction * galleryRef.current.clientWidth * 0.82,
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   };
 
@@ -35,7 +47,7 @@ function About() {
     if (!video) return;
 
     if (video.paused) {
-      video.play();
+      video.play().catch(() => setIsVideoPlaying(false));
     } else {
       video.pause();
     }
@@ -84,10 +96,11 @@ function About() {
               <video
                 ref={marketVideoRef}
                 src={marketVideo}
-                autoPlay
                 loop
                 muted={isMuted}
                 playsInline
+                preload="metadata"
+                poster={marketPhotos[0]}
                 onPlay={() => setIsVideoPlaying(true)}
                 onPause={() => setIsVideoPlaying(false)}
               />

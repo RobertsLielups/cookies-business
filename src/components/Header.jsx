@@ -7,7 +7,9 @@ import '../styles/header.css';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const variant = new URLSearchParams(search).get('variant')?.toUpperCase();
+  const homeHref = ['A', 'B', 'C'].includes(variant) ? `/?variant=${variant}` : '/';
   const { language, setLanguage, t } = useLanguage();
 
   function closeMenu() {
@@ -41,7 +43,7 @@ function Header() {
   return (
     <header className="header">
       <div className="container header__inner">
-        <Link to="/" className="header__logo" onClick={returnHome}>
+        <Link to={homeHref} className="header__logo" onClick={returnHome}>
           {company.logo ? (
             <img
               src={company.logo}
@@ -53,6 +55,7 @@ function Header() {
               GC
             </span>
           )}
+          <span className="header__wordmark" aria-hidden="true">cepumbums</span>
         </Link>
 
         <button

@@ -7,3 +7,17 @@
 .footer__social-link svg { width: 1.2rem; height: 1.2rem; }.footer__social-link svg path { fill: currentColor; }.footer__social-link:hover, .footer__social-link:focus-visible { background: var(--brand-gold); color: var(--text-primary); }
 .footer__heading { margin-bottom: var(--space-sm); color: var(--brand-gold-60); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }.footer__links { display: grid; gap: var(--space-xs); }.footer__link { font-size: var(--text-sm); }.footer__link:hover, .footer__link:focus-visible { color: #fff; }.footer__bottom { margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid rgba(255,255,255,.15); color: #bdb8b0; font-size: var(--text-xs); }
 @media (max-width: 768px) { .footer__grid { grid-template-columns: 1fr; gap: var(--space-lg); } }
+
+.footer { overflow: hidden; background: #f4d879; color: #591e2c; padding-block: 4rem 1.5rem; }
+.footer__grid { grid-template-columns: 1.3fr 1fr 1fr; gap: 3rem; }
+.footer__logo { width: 4.5rem; }
+.footer__tagline { max-width: 16rem; font-size: 1rem; }
+.footer__heading { color: #591e2c; font-size: .875rem; letter-spacing: .1em; }
+.footer__link { font-size: 1rem; }
+.footer__link:hover, .footer__link:focus-visible { color: #591e2c; text-decoration: underline; text-underline-offset: .2em; }
+.footer__social-link { border-color: #591e2c55; }
+.footer__social-link:hover { background: #591e2c; color: #fff2d3; }
+.footer__wordmark { position: relative; width: fit-content; font-family: var(--font-heading); font-size: clamp(4rem, 17.4vw, 17rem); line-height: .95; font-weight: 700; letter-spacing: -.075em; margin: 3rem auto 0; }
+.footer__wordmark > span { position: absolute; right: -1.2em; top: .8em; font-family: var(--font-body); font-size: .09em; letter-spacing: 0; }
+.footer__bottom { margin-top: 1.8rem; border-color: #591e2c44; color: #591e2c; font-size: .8125rem; }
+@media (max-width: 700px) { .footer__grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 1.5rem; } .footer__grid > :first-child { grid-column: 1 / -1; } .footer__wordmark { font-size: 16.7vw; margin-top: 2.5rem; } .footer__grid > * { min-width: 0; overflow-wrap: anywhere; } }
