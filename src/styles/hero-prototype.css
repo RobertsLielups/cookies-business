@@ -1,0 +1,42 @@
+/* PROTOTYPE — throwaway styles for HeroPrototype.jsx */
+@import './hero.css';
+
+.proto-switcher { position: fixed; bottom: 1rem; left: 50%; z-index: 999; display: flex; align-items: center; gap: .75rem; padding: .5rem .75rem; border-radius: 999px; background: #111; color: #fff; font: 600 .85rem/1 system-ui, sans-serif; box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.35); transform: translateX(-50%); white-space: nowrap; }
+.proto-switcher button { border: 0; border-radius: 999px; background: #333; color: #fff; padding: .35rem .6rem; cursor: pointer; font: inherit; }
+.proto-switcher em { color: #9a9a9a; font-style: normal; font-weight: 400; white-space: pre; }
+
+.proto-reveal { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+.proto-reveal.is-in { opacity: 1; transform: none; }
+
+/* Hero = full small viewport INCLUDING the fixed blurred header; clearance reserved inside. */
+.proto-hero { position: relative; box-sizing: border-box; min-height: 100svh; padding-top: var(--header-height); padding-bottom: env(safe-area-inset-bottom); overflow: hidden; background: var(--proto-bg); }
+.proto-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; min-height: calc(100svh - var(--header-height)); }
+.proto-hero__content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; padding-block: clamp(2rem, 6vw, 5rem); }
+.proto-hero__content .hero__description { max-width: 17rem; }
+.proto-hero__stage { position: static; }
+
+/* FIT: the whole frame is contained in the hero, right-aligned, no cropping, no fades.
+   Page colour is a flat match of the clip's backdrop so the letterbox edge stays quiet. */
+.proto-hero__media { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; object-position: 100% 50%; }
+/* A: full-bleed cover of the WIDE render (tower far right, ~62% of frame height) */
+.proto-hero--a .proto-hero__media { object-fit: cover; }
+
+.proto-hero--a, .proto-hero--b, .proto-hero--c, .proto-hero--e, .proto-hero--f { --proto-bg: #eeebe9; }
+.proto-hero--d { --proto-bg: #3a1d17; color: #f6efe2; }
+.proto-hero--d .hero__title { color: #f6efe2; }
+.proto-hero--d .hero__description { color: #d9cdb8; }
+
+@media (max-width: 768px) {
+  /* Copy under the navbar, 9:16 clip fits the remaining row, centred. */
+  .proto-hero__grid { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); align-items: start; }
+  .proto-hero__content { width: min(100%, 23rem); padding-block: 1.5rem .5rem; }
+  .proto-hero__content .hero__title { font-size: clamp(3.5rem, 18.5vw, 6.5rem); letter-spacing: -.09em; }
+  .proto-hero__content .hero__description { margin-top: var(--space-sm); }
+  .proto-hero__content .hero__cta { margin-top: var(--space-md); }
+  .proto-hero__stage { position: relative; min-height: 20rem; }
+  .proto-hero__media { object-fit: contain; object-position: 50% 100%; }
+  .proto-hero--a .proto-hero__media { object-fit: cover; object-position: 50% 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .proto-reveal { opacity: 1; transform: none; transition: none; }
+}
