@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 function Home() {
   return (
     <>
-      <Header />
+      <Header overlay />
       <main className="site-main">
         <div className="site-main__content">
           <Hero />

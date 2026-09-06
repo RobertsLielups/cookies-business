@@ -27,6 +27,7 @@ const en = {
     heroEyebrow: 'Family bakery',
     heroDescription: 'Baked with care.',
     heroCta: 'Explore our cookies',
+    heroContact: 'Get in touch',
     collectionLabel: 'Our collection',
     collectionTitle: 'Cookies worth savouring',
     collectionDescription: 'Each flavour is baked in small batches using real butter, premium chocolate, and the patience that only a family kitchen can offer.',
@@ -59,7 +60,7 @@ const en = {
       'In 2012, our family business, SIA “Eiras”, began its journey. Since then, we have grown and changed, but one thing has always remained the same: our desire to create with care, love, and genuine joy in what we do.',
       'Because for us, baking has always been about more than just something sweet. It is the feeling of home, cherished memories, and little moments made to be shared.',
     ],
-    marketsLabel: 'Meet us in person', marketsTitle: 'Local markets & fairs', marketsDescription: 'You can also find our products at local markets and fairs.', marketsRegion: 'Cepumbums at local markets and fairs', galleryControls: 'Market gallery controls', previousPhotos: 'Show previous market photos', nextPhotos: 'Show next market photos', pauseVideo: 'Pause video', playVideo: 'Play video', soundOn: 'Turn sound on', soundOff: 'Turn sound off', marketPhoto: 'Cepumbums at a local market, photo {number}',
+    marketsRegion: 'Cepumbums at local markets and fairs', previousPhotos: 'Show previous market photos', nextPhotos: 'Show next market photos', soundOn: 'Turn sound on', soundOff: 'Turn sound off', marketPhoto: 'Cepumbums at a local market, photo {number}',
   },
   contact: {
     label: 'Contact',

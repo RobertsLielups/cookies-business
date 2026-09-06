@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import NavLink from './NavLink';
 import '../styles/header.css';
 
-function Header() {
+function Header({ overlay = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const { language, setLanguage, t } = useLanguage();
@@ -39,7 +39,7 @@ function Header() {
   }
 
   return (
-    <header className="header">
+    <header className={`header${overlay ? ' header--overlay' : ''}`}>
       <div className="container header__inner">
         <Link to="/" className="header__logo" onClick={returnHome}>
           {company.logo ? (
