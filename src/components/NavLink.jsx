@@ -3,7 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 /** Renders internal navigation links through React Router. */
 function NavLink({ href, className, children, onClick }) {
   const isAppRoute = href.startsWith('/');
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const variant = new URLSearchParams(search).get('variant')?.toUpperCase();
+  const [destination, anchor] = href.split('#');
+  const target = isAppRoute && ['A', 'B', 'C'].includes(variant)
+    ? `${destination}?variant=${variant}${anchor ? `#${anchor}` : ''}`
+    : href;
   const routePath = href.split('#')[0] || '/';
   const isCurrent = !href.includes('#') && pathname === routePath;
   const hashTarget = href.startsWith('/#') ? href.slice(2) : null;
@@ -24,7 +29,7 @@ function NavLink({ href, className, children, onClick }) {
 
   if (isAppRoute) {
     return (
-      <Link to={href} className={className} onClick={handleClick} aria-current={isCurrent ? 'page' : undefined}>
+      <Link to={target} className={className} onClick={handleClick} aria-current={isCurrent ? 'page' : undefined}>
         {children}
       </Link>
     );

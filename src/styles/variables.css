@@ -72,3 +72,21 @@
   --layer-header: 3;
   --transition: 180ms ease;
 }
+
+/* Bakery editorial: cherry ink, golden butter, warm paper. */
+:root {
+  --background-main: #fffaf0;
+  --background-soft: #f4d879;
+  --surface: #fffdf7;
+  --surface-muted: #f5eddf;
+  --text-primary: #591e2c;
+  --text-secondary: #745858;
+  --dark-neutral: #591e2c;
+  --border-color: #dacabd;
+  --font-body: 'Avenir Next Condensed', 'Avenir Next', 'Arial Narrow', Arial, sans-serif;
+  --font-heading: 'Avenir Next Condensed', 'Avenir Next', 'Arial Narrow', Arial, sans-serif;
+  --container-max: 90rem;
+  --container-padding: clamp(1.5rem, 5vw, 5rem);
+  --header-height: 5.5rem;
+  --section-space: clamp(5rem, 9vw, 9rem);
+}

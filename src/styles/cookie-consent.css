@@ -2,3 +2,13 @@
 .cookie-banner__content { flex: 1 1 26rem; }.cookie-banner__title { font-size: var(--text-xl); font-weight: 700; line-height: 1.15; }.cookie-banner__text { margin-top: var(--space-2xs); color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.45; }.cookie-banner__actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-xs); }
 .cookie-button { min-height: 2.75rem; padding: .625rem 1rem; border: 1px solid var(--brand-gold); border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background-color var(--transition), color var(--transition); }.cookie-button--primary { background: var(--brand-gold); color: var(--text-primary); }.cookie-button--primary:hover, .cookie-button--primary:focus-visible { background: var(--brand-gold-80); }.cookie-button--secondary:hover, .cookie-button--secondary:focus-visible { background: var(--brand-gold-20); }
 @media (max-width: 768px) { .cookie-banner { align-items: stretch; flex-direction: column; gap: var(--space-sm); }.cookie-banner__actions { justify-content: stretch; }.cookie-button { flex: 1 1 8rem; } }
+
+.cookie-banner { right: auto; left: 1.25rem; bottom: 1.25rem; display: block; width: min(27rem, calc(100% - 2.5rem)); margin: 0; padding: 1.25rem; border-color: #d8cbb8; border-radius: .3rem; background: #fffaf0f5; color: #392820; backdrop-filter: blur(16px); box-shadow: 0 8px 40px #20171326; max-height: calc(100svh - 2.5rem); overflow-y: auto; }
+.cookie-banner__content { flex: initial; }
+.cookie-banner__title { font-family: var(--font-heading); font-weight: 600; font-size: 1.5rem; }
+.cookie-banner__text { color: #766658; }
+.cookie-banner__actions { margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.cookie-button { font-size: .8125rem; letter-spacing: .02em; text-transform: none; border-color: #9d825b; }
+.cookie-button--primary { background: #392820; color: #fffaf0; }
+.cookie-button--primary:hover { background: #594331; }
+@media (max-width: 700px) { .cookie-banner { left: .75rem; bottom: .75rem; width: calc(100% - 1.5rem); padding: 1rem; } .cookie-banner__text { font-size: .8125rem; } .cookie-banner__actions { margin-top: .75rem; } }

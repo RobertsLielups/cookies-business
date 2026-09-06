@@ -91,6 +91,7 @@ function Footer() {
           </div>
         </div>
 
+        <div className="footer__wordmark" aria-hidden="true">cepumbums<span>✳</span></div>
         <p className="footer__bottom">
           &copy; {currentYear} {company.name}. {t('common.allRightsReserved')}
         </p>

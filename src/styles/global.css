@@ -32,3 +32,9 @@ ul { list-style: none; }
 .form-textarea { min-height: 9rem; resize: vertical; }
 .form-success { padding: var(--space-lg); border: 1px solid #b9d7c2; background: var(--success-bg); color: var(--success); }
 @media (max-width: 768px) { .section { padding-block: clamp(3.75rem, 13vw, 5rem); } .section-title { font-size: var(--text-2xl); } }
+
+.section-label { color: #825327; font-size: .875rem; font-weight: 600; letter-spacing: .17em; }
+.section-title { font-weight: 500; font-size: clamp(3rem, 4.8vw, 5rem); letter-spacing: -.05em; line-height: 1.02; text-wrap: balance; }
+.section-description { line-height: 1.6; }
+.btn { border-radius: 100px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
