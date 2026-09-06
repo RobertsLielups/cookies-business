@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { LanguageProvider } from './context/LanguageContext.jsx';
+import { CookieConsentProvider } from './context/CookieConsentContext.jsx';
+import CookieConsent from './components/CookieConsent.jsx';
 import { company } from './data/company';
 import { setFavicon } from './utils/setFavicon';
 import './styles/global.css';
@@ -17,9 +19,12 @@ setFavicon(company.logo);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LanguageProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <CookieConsentProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+        <CookieConsent />
+      </CookieConsentProvider>
     </LanguageProvider>
   </StrictMode>
 );

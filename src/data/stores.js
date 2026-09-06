@@ -3,7 +3,14 @@
  * can be reused across the catalog. Use the existing product `id` value from
  * allProducts.js when adding a productAvailability entry.
  */
-export const stores = [];
+export const stores = [
+  {
+    id: 'dabigi-produkti-barona-41-43',
+    name: 'Dabigi produkti',
+    address: 'Krišjāņa Barona iela 41/43, Centra rajons, Rīga, LV-1011',
+    city: 'Rīga',
+  },
+];
 
 /**
  * Add one entry per product/store pairing. Supported statuses are:
@@ -17,7 +24,13 @@ export const stores = [];
  *   status: 'available',
  * }
  */
-export const productAvailability = [];
+export const productAvailability = [
+  {
+    storeId: 'dabigi-produkti-barona-41-43',
+    productId: 'Mandeļu Mākoņi',
+    status: 'available',
+  },
+];
 
 const visibleStatuses = new Set(['available', 'low']);
 

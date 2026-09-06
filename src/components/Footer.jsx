@@ -63,6 +63,8 @@ function Footer() {
                   </NavLink>
                 </li>
               ))}
+              <li><NavLink href="/privacy" className="footer__link">{t('footer.privacyPolicy')}</NavLink></li>
+              <li><NavLink href="/cookies" className="footer__link">{t('footer.cookiePolicy')}</NavLink></li>
             </ul>
           </div>
 
