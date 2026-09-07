@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { company, navLinks } from '../data/company';
 import { useLanguage } from '../context/LanguageContext';
@@ -6,9 +6,29 @@ import NavLink from './NavLink';
 import '../styles/header.css';
 
 function Header({ overlay = false }) {
+  const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const { pathname } = useLocation();
   const { language, setLanguage, t } = useLanguage();
+
+  useEffect(() => {
+    if (!overlay) return undefined;
+
+    const header = headerRef.current;
+    const hero = document.getElementById('home');
+    if (!header || !hero) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(entry.boundingClientRect.bottom <= header.offsetHeight),
+      { rootMargin: `-${header.offsetHeight}px 0px 0px 0px` },
+    );
+    observer.observe(hero);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [overlay]);
 
   function closeMenu() {
     setMenuOpen(false);
@@ -39,7 +59,10 @@ function Header({ overlay = false }) {
   }
 
   return (
-    <header className={`header${overlay ? ' header--overlay' : ''}`}>
+    <header
+      ref={headerRef}
+      className={`header${overlay ? ' header--overlay' : ''}${overlay && pastHero ? ' header--scrolled' : ''}`}
+    >
       <div className="container header__inner">
         <Link to="/" className="header__logo" onClick={returnHome}>
           {company.logo ? (
