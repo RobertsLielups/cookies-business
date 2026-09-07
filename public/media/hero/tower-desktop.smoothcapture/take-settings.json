@@ -1,0 +1,27 @@
+{
+  "deviceFrameName" : "3D\/MacBook_Pro.usdc",
+  "systemVolume" : 1,
+  "cropHeight" : 1,
+  "micDelay" : 0,
+  "revealFraction" : 0.08,
+  "backgroundPadding" : 0.9,
+  "cursorStyle" : 0,
+  "showCursor" : false,
+  "deviceFrameRect" : {
+    "y" : 0,
+    "height" : 1,
+    "x" : 0,
+    "width" : 1
+  },
+  "previewAspectRatio" : "Match Video",
+  "selectedBackgroundImage" : "Abstract\/Wave_Mac",
+  "cropWidth" : 1,
+  "systemDelay" : 0,
+  "cropY" : 0,
+  "micVolume" : 1,
+  "cursorSet" : "macos",
+  "cropX" : 0,
+  "cursorSize" : 1,
+  "cropEnabled" : false,
+  "backgroundCornerRadius" : 0.06
+}

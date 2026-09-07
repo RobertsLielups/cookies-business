@@ -1,0 +1,12 @@
+{
+  "hasEmbeddedSystemAudio" : false,
+  "isIOSRecording" : false,
+  "recordingDate" : "2026-09-07T11:02:00Z",
+  "duration" : 8.042,
+  "files" : [
+    {
+      "filename" : "tower-desktop.mp4",
+      "type" : "screen"
+    }
+  ]
+}

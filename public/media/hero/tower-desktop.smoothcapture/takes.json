@@ -1,0 +1,26 @@
+{
+  "takes" : [
+    {
+      "id" : "take-1",
+      "name" : "tower-desktop",
+      "bundleInfo" : {
+        "isIOSRecording" : false,
+        "files" : [
+          {
+            "filename" : "tower-desktop.mp4",
+            "type" : "screen"
+          }
+        ],
+        "recordingDate" : "2026-09-07T11:02:00Z",
+        "hasEmbeddedSystemAudio" : false,
+        "duration" : 8.042
+      },
+      "relativePath" : "",
+      "settingsFileName" : "take-settings.json",
+      "createdDate" : "2026-09-07T11:02:00Z",
+      "transcriptFileName" : "transcript.json"
+    }
+  ],
+  "version" : 1,
+  "selectedTakeId" : "take-1"
+}

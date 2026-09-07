@@ -1,0 +1,179 @@
+{
+  "environmentRotation" : 150,
+  "voiceTrackMuted" : false,
+  "micTrackMuted" : false,
+  "webcamPosition" : "bottomLeft",
+  "magnifyScale" : 2,
+  "keystrokeDisappearBounce" : 0,
+  "webcamEnabled" : false,
+  "clickSoundProfile" : "crisp",
+  "motionBlurCursorAmount" : 0.6,
+  "magnifyEnabled" : false,
+  "motionBlurEnabled" : false,
+  "keystrokeDisplayEnabled" : false,
+  "webcamShadowIntensity" : 1,
+  "cursorFollowSafeZone" : 0.7,
+  "borderWidth" : 0.01,
+  "keystrokeFont" : 14,
+  "autoZoomGenerated" : false,
+  "cinematicCursorEnabled" : true,
+  "environmentTableEnabled" : false,
+  "deviceReflectionStrength" : 0.35,
+  "useEnvironmentAsBackground" : true,
+  "borderGradientEnabled" : false,
+  "keystrokePillCornerRadius" : 0.5,
+  "voiceTrackVolume" : 1,
+  "recordingAudioDelay" : 0,
+  "lastModified" : "2026-09-07T11:02:02Z",
+  "webcamSize" : 0.2,
+  "borderColor" : {
+    "z" : 1,
+    "y" : 1,
+    "x" : 1
+  },
+  "keystrokePillOpacity" : 1,
+  "webcamGap" : 0.15,
+  "webcamShape" : "square",
+  "cameraLayouts" : [
+
+  ],
+  "subtitleSize" : 0.08,
+  "borderGradientColor1" : {
+    "z" : 0.5,
+    "y" : 0.5,
+    "x" : 1
+  },
+  "selectedBackgroundImage" : "Abstract\/Wave_Mac",
+  "systemAudioVolume" : 1,
+  "keystrokeDisappearDuration" : 0.35,
+  "motionBlurScreenAmount" : 0.6,
+  "environmentPitch" : 0,
+  "cursorFollowSpringDuration" : 0.8,
+  "audioClips" : [
+
+  ],
+  "borderStyle" : "Solid",
+  "cameraTransforms" : [
+
+  ],
+  "motionBlurWebcamAmount" : 0.6,
+  "webcamBorderEnabled" : false,
+  "environmentDepthOfFieldAmount" : 0.5,
+  "createdDate" : "2026-09-07T11:02:02Z",
+  "deviceFrameRect" : {
+    "y" : 0,
+    "height" : 1,
+    "x" : 0,
+    "width" : 1
+  },
+  "environmentScreenReflection" : 0.1,
+  "environmentExposure" : 1,
+  "webcamShadowOffset" : {
+    "y" : -0.005,
+    "x" : 0
+  },
+  "webcamShadowOpacity" : 0.3,
+  "webcamBackgroundColor" : {
+    "z" : 0.16,
+    "y" : 0.11,
+    "x" : 0.09
+  },
+  "systemTrackMuted" : false,
+  "borderGradientColor2" : {
+    "z" : 1,
+    "y" : 0.5,
+    "x" : 0.5
+  },
+  "showCursor" : false,
+  "keystrokeAppearBounce" : 0.15,
+  "webcamBorderWidth" : 0.015,
+  "keystrokeBackgroundOpacity" : 1,
+  "fireEnabled" : false,
+  "lensRadius" : 0.1,
+  "webcamBorderColor" : {
+    "z" : 1,
+    "y" : 1,
+    "x" : 1
+  },
+  "webcamCustomPosition" : {
+    "y" : 0,
+    "x" : 0
+  },
+  "caretFollowEnabled" : false,
+  "cursorAutoHideEnabled" : true,
+  "effectBlocks" : [
+
+  ],
+  "webcamShadowBlur" : 8,
+  "keystrokeHoldDuration" : 1,
+  "borderWidthPixels" : 4,
+  "webcamShadowEnabled" : true,
+  "webcamContentOffset" : {
+    "y" : 0,
+    "x" : 0
+  },
+  "lensEnabled" : false,
+  "borderGlowIntensity" : 0.5,
+  "recordingAudioVolume" : 1,
+  "webcamCornerRadius" : 0.25,
+  "motionBlurDeviceAmount" : 0.6,
+  "keystrokeAppearDuration" : 0.5,
+  "systemAudioDelay" : 0,
+  "clickSoundVolume" : 0.05,
+  "clickSoundEnabled" : false,
+  "systemVolumeRegions" : [
+
+  ],
+  "fireIntensity" : 0.06,
+  "cursorSpringDuration" : 0.3,
+  "cursorVisualDelay" : 0,
+  "environmentDepthOfFieldEnabled" : true,
+  "deviceFrameName" : "3D\/MacBook_Pro.usdc",
+  "webcamFlipped" : false,
+  "environmentLightingExposure" : 1,
+  "version" : 2,
+  "cursorSpringEnabled" : false,
+  "projectName" : "tower-desktop",
+  "selectedEnvironmentImage" : "glasshouse_interior_2k.hdr",
+  "lensIntensity" : 0.3,
+  "annotations" : [
+
+  ],
+  "zoomEffects" : [
+
+  ],
+  "borderGlowEnabled" : false,
+  "clickRippleEnabled" : false,
+  "fireSpeed" : 0.2,
+  "videoSegments" : [
+    {
+      "endTime" : 8.042,
+      "originalStartTime" : 0,
+      "timelineStartTime" : 0,
+      "originalEndTime" : 8.042,
+      "name" : "Main Segment",
+      "sourceTakeId" : "take-1",
+      "startTime" : 0,
+      "speed" : 1,
+      "isStillImage" : false,
+      "transitionStyle" : "cut"
+    }
+  ],
+  "cursorFollowSpringBounce" : 0,
+  "keystrokePosition" : "Bottom Right",
+  "webcamBackgroundEffect" : "none",
+  "backgroundPadding" : 0.9,
+  "systemTrackVolume" : 1,
+  "magnifyRadius" : 0.15,
+  "backgroundCornerRadius" : 0.06,
+  "keystrokeMaxVisibleKeys" : 3,
+  "micVolumeRegions" : [
+
+  ],
+  "cursorFollowEnabled" : false,
+  "micTrackVolume" : 1,
+  "borderEnabled" : false,
+  "revealFraction" : 0.08,
+  "cursorSpringBounce" : 0.2,
+  "deviceReflectionEnabled" : false
+}
