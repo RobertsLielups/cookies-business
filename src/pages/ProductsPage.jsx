@@ -1,9 +1,8 @@
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import ProductCard from '../components/ProductCard';
 import Footer from '../components/Footer';
 import { allProducts, getLocalizedProduct } from '../data/allProducts';
 import { useLanguage } from '../context/LanguageContext';
-import '../styles/products.css';
 import '../styles/products-page.css';
 
 function ProductsPage() {
@@ -12,21 +11,25 @@ function ProductsPage() {
     <>
       <Header />
       <main>
-        <section className="products-page section">
-          <div className="container">
-            <header className="section-header">
-              <span className="section-label">{t('products.pageLabel')}</span>
-              <h1 className="section-title">{t('products.pageTitle')}</h1>
-              <p className="section-description">
-                {t('products.pageDescription')}
-              </p>
-            </header>
+        <section className="products-page">
+          <div className="container products-page__head">
+            <span className="section-label">{t('products.pageLabel')}</span>
+            <h1 className="section-title">{t('products.pageTitle')}</h1>
+            <p className="section-description">
+              {t('products.pageDescription')}
+            </p>
+          </div>
 
-            <div className="products__grid">
-              {allProducts.map((product) => (
-                <ProductCard key={product.id} {...getLocalizedProduct(product, language)} />
-              ))}
-            </div>
+          <div className="products-page__tiles">
+            {allProducts.map((product) => {
+              const { id, name, image, imageAlt } = getLocalizedProduct(product, language);
+              return (
+                <Link key={id} to={`/products/${id}`} className="product-tile">
+                  <img src={image} alt={imageAlt} loading="lazy" />
+                  <span className="product-tile__name">{name}</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       </main>
