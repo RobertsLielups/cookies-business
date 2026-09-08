@@ -1,12 +1,16 @@
-import { useRef, useState } from 'react';
+import { Suspense, lazy, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import StoreAvailabilityMap from '../components/StoreAvailabilityMap';
 import { allProducts, getLocalizedProduct } from '../data/allProducts';
 import { getAvailableStoresForProduct } from '../data/stores';
 import { useLanguage } from '../context/LanguageContext';
+import { pageMeta } from '../seo';
+import { usePageMeta } from '../utils/usePageMeta';
 import '../styles/product-detail.css';
+
+// Leaflet touches `window` on import, so the map must not be part of the prerender bundle.
+const StoreAvailabilityMap = lazy(() => import('../components/StoreAvailabilityMap'));
 
 function getMapsUrl({ latitude, longitude, address, city }) {
   const location =
@@ -27,7 +31,12 @@ function ProductDetailPage() {
   const sourceProduct = allProducts.find((item) => item.slug === productId || item.id === productId);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const lightboxRef = useRef(null);
-  const { language, t } = useLanguage();
+  const { language, t, localePath } = useLanguage();
+  usePageMeta(
+    sourceProduct
+      ? pageMeta(language, 'product', getLocalizedProduct(sourceProduct, language))
+      : { title: `${t('productDetail.notFoundTitle')} | Cepumbums`, description: t('productDetail.notFoundDescription') },
+  );
 
   if (!sourceProduct) {
     return (
@@ -40,7 +49,7 @@ function ProductDetailPage() {
               <p className="section-description">
                 {t('productDetail.notFoundDescription')}
               </p>
-              <Link to="/products" className="btn btn--primary">
+              <Link to={localePath('/products')} className="btn btn--primary">
                 {t('productDetail.viewAll')}
               </Link>
             </div>
@@ -97,7 +106,7 @@ function ProductDetailPage() {
       <main className="product-detail">
         <section className="section product-detail__section">
           <div className="container">
-            <Link to="/products" className="product-detail__back">
+            <Link to={localePath('/products')} className="product-detail__back">
               ← {t('productDetail.backToProducts')}
             </Link>
 
@@ -232,7 +241,11 @@ function ProductDetailPage() {
                       </li>
                     ))}
                   </ul>
-                  {mappableStores.length > 0 && <StoreAvailabilityMap stores={mappableStores} />}
+                  {mappableStores.length > 0 && (
+                    <Suspense fallback={null}>
+                      <StoreAvailabilityMap stores={mappableStores} />
+                    </Suspense>
+                  )}
                 </div>
               ) : (
                 <p className="product-availability__empty">{t('availability.empty')}</p>

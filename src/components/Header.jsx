@@ -10,7 +10,8 @@ function Header({ overlay = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const { pathname } = useLocation();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t, localePath } = useLanguage();
+  const home = localePath('/');
 
   useEffect(() => {
     if (!overlay) return undefined;
@@ -43,7 +44,7 @@ function Header({ overlay = false }) {
 
     // React Router does not reset the scroll position when linking to the
     // current route, so make the brand reliably return to the hero section.
-    if (pathname === '/') {
+    if (pathname === home) {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -52,7 +53,7 @@ function Header({ overlay = false }) {
   function handleNavigation(href, event) {
     closeMenu();
 
-    if (href === '/' && pathname === '/') {
+    if (href === '/' && pathname === home) {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -64,7 +65,7 @@ function Header({ overlay = false }) {
       className={`header${overlay ? ' header--overlay' : ''}${overlay && pastHero ? ' header--scrolled' : ''}`}
     >
       <div className="container header__inner">
-        <Link to="/" className="header__logo" onClick={returnHome}>
+        <Link to={home} className="header__logo" onClick={returnHome}>
           {company.logo ? (
             <img
               src={company.logo}

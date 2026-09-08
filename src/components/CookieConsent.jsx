@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useCookieConsent } from '../context/CookieConsentContext';
 import { useLanguage } from '../context/LanguageContext';
 import '../styles/cookie-consent.css';
@@ -5,8 +6,11 @@ import '../styles/cookie-consent.css';
 function CookieConsent() {
   const { t } = useLanguage();
   const { hasMadeChoice, savePreferences } = useCookieConsent();
+  // The stored choice is only known in the browser; render nothing until mounted so prerendered HTML hydrates cleanly.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  if (hasMadeChoice) return null;
+  if (!mounted || hasMadeChoice) return null;
 
   return (
     <section className="cookie-banner" aria-labelledby="cookie-banner-title">

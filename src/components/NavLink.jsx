@@ -1,10 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
-/** Renders internal navigation links through React Router. */
+/** Renders internal navigation links through React Router, under the current language prefix. */
 function NavLink({ href, className, children, onClick, tabIndex }) {
   const isAppRoute = href.startsWith('/');
   const { pathname } = useLocation();
-  const routePath = href.split('#')[0] || '/';
+  const { localePath } = useLanguage();
+  const to = isAppRoute ? localePath(href) : href;
+  const home = localePath('/');
+  const routePath = to.split('#')[0];
   const isCurrent = !href.includes('#') && pathname === routePath;
   const hashTarget = href.startsWith('/#') ? href.slice(2) : null;
 
@@ -13,7 +17,7 @@ function NavLink({ href, className, children, onClick, tabIndex }) {
 
     // React Router does not always re-run a same-route hash navigation. Make
     // in-page links reliable in both the header and footer.
-    if (!event.defaultPrevented && hashTarget && pathname === '/') {
+    if (!event.defaultPrevented && hashTarget && pathname === home) {
       event.preventDefault();
       document.getElementById(hashTarget)?.scrollIntoView({
         behavior: 'smooth',
@@ -24,7 +28,7 @@ function NavLink({ href, className, children, onClick, tabIndex }) {
 
   if (isAppRoute) {
     return (
-      <Link to={href} className={className} onClick={handleClick} tabIndex={tabIndex} aria-current={isCurrent ? 'page' : undefined}>
+      <Link to={to} className={className} onClick={handleClick} tabIndex={tabIndex} aria-current={isCurrent ? 'page' : undefined}>
         {children}
       </Link>
     );

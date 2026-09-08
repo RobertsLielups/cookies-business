@@ -1,18 +1,22 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import en from '../locales/en';
 import lv from '../locales/lv';
 
 const LANGUAGE_STORAGE_KEY = 'cepumbums-language';
-const supportedLanguages = { en, lv };
+export const supportedLanguages = { en, lv };
+export const languageCodes = Object.keys(supportedLanguages);
 const LanguageContext = createContext(null);
 
-function getStoredLanguage() {
+/** Stored choice, else Latvian. Only used to pick a prefix when the URL has none. */
+export function getPreferredLanguage() {
   try {
-    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    return supportedLanguages[storedLanguage] ? storedLanguage : 'en';
+    const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    if (supportedLanguages[stored]) return stored;
   } catch {
-    return 'en';
+    // Storage unavailable; use the default.
   }
+  return 'lv';
 }
 
 function getTranslation(messages, path) {
@@ -26,17 +30,16 @@ function interpolate(message, values) {
   );
 }
 
-export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(getStoredLanguage);
+/**
+ * The language is the URL prefix (/en, /lv). Switching navigates to the same page under the other
+ * prefix; the choice is remembered so the root URL can pick it next time.
+ */
+export function LanguageProvider({ language, children }) {
+  const navigate = useNavigate();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.title = supportedLanguages[language].metadata.title;
-    document.querySelector('meta[name="description"]')?.setAttribute(
-      'content',
-      supportedLanguages[language].metadata.description,
-    );
-
     try {
       window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     } catch {
@@ -49,15 +52,21 @@ export function LanguageProvider({ children }) {
 
     return {
       language,
+      /** '/products' -> '/lv/products', '/#about' -> '/lv#about', '/' -> '/lv'. */
+      localePath: (href) => {
+        const [path, fragment] = href.split('#');
+        return `/${language}${path === '/' ? '' : path}${fragment ? `#${fragment}` : ''}`;
+      },
       setLanguage: (nextLanguage) => {
-        if (supportedLanguages[nextLanguage]) setLanguage(nextLanguage);
+        if (nextLanguage === language || !supportedLanguages[nextLanguage]) return;
+        navigate(pathname.replace(/^\/[a-z]{2}(?=\/|$)/, `/${nextLanguage}`) + hash, { replace: true });
       },
       t: (path, replacements = {}) => {
         const translation = getTranslation(messages, path) ?? getTranslation(en, path) ?? path;
         return typeof translation === 'string' ? interpolate(translation, replacements) : translation;
       },
     };
-  }, [language]);
+  }, [language, navigate, pathname, hash]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

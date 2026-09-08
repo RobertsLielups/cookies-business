@@ -1,10 +1,7 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import { LanguageProvider } from './context/LanguageContext.jsx';
-import { CookieConsentProvider } from './context/CookieConsentContext.jsx';
-import CookieConsent from './components/CookieConsent.jsx';
 import { company } from './data/company';
 import { setFavicon } from './utils/setFavicon';
 import './styles/global.css';
@@ -16,15 +13,18 @@ if ('scrollRestoration' in window.history) {
 
 setFavicon(company.logo);
 
-createRoot(document.getElementById('root')).render(
+const root = document.getElementById('root');
+const app = (
   <StrictMode>
-    <LanguageProvider>
-      <CookieConsentProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-        <CookieConsent />
-      </CookieConsentProvider>
-    </LanguageProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );
+
+// Prerendered pages ship their HTML; hydrate it. The bare index.html (dev, unknown routes) renders from scratch.
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}

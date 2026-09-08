@@ -19,9 +19,13 @@ const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: r
  */
 function TowerVideo({ onProgress }) {
   const ref = useRef(null);
-  const [still, setStill] = useState(() => prefersReducedMotion());
+  const [still, setStill] = useState(false);
 
   useEffect(() => {
+    if (prefersReducedMotion()) {
+      setStill(true);
+      return;
+    }
     const video = ref.current;
     if (!video) return;
     video.playbackRate = PLAYBACK_RATE;
@@ -47,7 +51,7 @@ function TowerVideo({ onProgress }) {
 }
 
 function Hero() {
-  const { t } = useLanguage();
+  const { t, localePath } = useLanguage();
   const [progress, setProgress] = useState(0);
   const titleIn = progress >= REVEAL_TITLE;
   const ctaIn = progress >= REVEAL_CTA;
@@ -63,7 +67,7 @@ function Hero() {
           <h1 className={`hero__title hero__reveal${titleIn ? ' is-in' : ''}`}>CEPUMBUMS</h1>
           <p className={`hero__description hero__reveal${ctaIn ? ' is-in' : ''}`}>{t('homepage.heroDescription')}</p>
           <div className={`hero__actions hero__reveal${ctaIn ? ' is-in' : ''}`}>
-            <Link to="/products" className="btn btn--primary" tabIndex={ctaIn ? 0 : -1}>
+            <Link to={localePath('/products')} className="btn btn--primary" tabIndex={ctaIn ? 0 : -1}>
               {t('homepage.heroCta')}
             </Link>
             <NavLink href="/#contact" className="btn btn--secondary" tabIndex={ctaIn ? 0 : -1}>

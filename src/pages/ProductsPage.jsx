@@ -3,10 +3,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { allProducts, getLocalizedProduct } from '../data/allProducts';
 import { useLanguage } from '../context/LanguageContext';
+import { pageMeta } from '../seo';
+import { usePageMeta } from '../utils/usePageMeta';
 import '../styles/products-page.css';
 
 function ProductsPage() {
-  const { language, t } = useLanguage();
+  const { language, t, localePath } = useLanguage();
+  usePageMeta(pageMeta(language, 'products'));
   return (
     <>
       <Header />
@@ -24,7 +27,7 @@ function ProductsPage() {
             {allProducts.map((product) => {
               const { id, slug, name, image, imageAlt } = getLocalizedProduct(product, language);
               return (
-                <Link key={id} to={`/products/${slug}`} className="product-tile">
+                <Link key={id} to={localePath(`/products/${slug}`)} className="product-tile">
                   <img src={image} alt={imageAlt} loading="lazy" />
                   <span className="product-tile__name">{name}</span>
                 </Link>

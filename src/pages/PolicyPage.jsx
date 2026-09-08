@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { company } from '../data/company';
 import { legalInfo, legalReviewFields, policyLastUpdated } from '../data/legal';
 import { useLanguage } from '../context/LanguageContext';
+import { pageMeta } from '../seo';
+import { usePageMeta } from '../utils/usePageMeta';
 import '../styles/policy.css';
 
 function ConfigurationDetails() {
@@ -70,13 +71,9 @@ function PolicySection({ section }) {
 }
 
 function PolicyPage({ type }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const policy = t(`${type}Policy`);
-
-  useEffect(() => {
-    document.title = policy.metadataTitle;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', policy.metadataDescription);
-  }, [policy.metadataDescription, policy.metadataTitle]);
+  usePageMeta(pageMeta(language, type === 'privacy' ? 'privacy' : 'cookies'));
 
   return (
     <>
