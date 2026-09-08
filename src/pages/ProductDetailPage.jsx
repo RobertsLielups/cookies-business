@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -23,21 +23,11 @@ function formatNumber(value, language) {
 
 function ProductDetailPage() {
   const { productId } = useParams();
-  const sourceProduct = allProducts.find((item) => item.id === productId);
+  // Slug is canonical; the old name-based id keeps existing links working.
+  const sourceProduct = allProducts.find((item) => item.slug === productId || item.id === productId);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const lightboxRef = useRef(null);
   const { language, t } = useLanguage();
-
-  useEffect(() => {
-    if (!lightboxOpen) return undefined;
-
-    function handleKeyDown(event) {
-      if (event.key === 'Escape') setLightboxOpen(false);
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
 
   if (!sourceProduct) {
     return (
@@ -45,7 +35,7 @@ function ProductDetailPage() {
         <Header />
         <main className="product-detail">
           <section className="section">
-            <div className="container product-detail__not-found content-panel">
+            <div className="container product-detail__not-found">
               <h1 className="section-title">{t('productDetail.notFoundTitle')}</h1>
               <p className="section-description">
                 {t('productDetail.notFoundDescription')}
@@ -120,7 +110,7 @@ function ProductDetailPage() {
                 <button
                   type="button"
                   className="product-detail__image-trigger"
-                  onClick={() => setLightboxOpen(true)}
+                  onClick={() => lightboxRef.current?.showModal()}
                   aria-label={t('productDetail.openImage', { name: activeImage.alt })}
                 >
                   <img
@@ -137,7 +127,7 @@ function ProductDetailPage() {
                       onClick={showPreviousImage}
                       aria-label={t('productDetail.previousImage')}
                     >
-                      ←
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
                     </button>
                     <button
                       type="button"
@@ -145,7 +135,7 @@ function ProductDetailPage() {
                       onClick={showNextImage}
                       aria-label={t('productDetail.nextImage')}
                     >
-                      →
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
                     </button>
                   </div>
                 )}
@@ -153,6 +143,7 @@ function ProductDetailPage() {
 
               <div className="product-detail__content">
                 <header className="product-detail__summary">
+                  <span className="section-label">{t('products.pageLabel')}</span>
                   <h1 className="section-title">{product.name}</h1>
                   {product.description && (
                     <p className="product-detail__description">{product.description}</p>
@@ -250,30 +241,15 @@ function ProductDetailPage() {
           </div>
         </section>
       </main>
-      {lightboxOpen && (
-        <div
-          className="product-lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label={t('productDetail.openImage', { name: activeImage.alt })}
-          onClick={() => setLightboxOpen(false)}
-        >
-          <div
-            className="product-lightbox__content"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="product-lightbox__close"
-              onClick={() => setLightboxOpen(false)}
-              aria-label={t('productDetail.closeImage')}
-            >
-              ×
-            </button>
-            <img src={activeImage.src} alt={activeImage.alt} />
-          </div>
-        </div>
-      )}
+      {/* Native dialog: Escape closes it; a click on the backdrop (the dialog itself, not its child) closes it too. */}
+      <dialog
+        ref={lightboxRef}
+        className="product-lightbox"
+        aria-label={t('productDetail.openImage', { name: activeImage.alt })}
+        onClick={(event) => event.target === event.currentTarget && event.currentTarget.close()}
+      >
+        <img src={activeImage.src} alt={activeImage.alt} />
+      </dialog>
       <Footer />
     </>
   );

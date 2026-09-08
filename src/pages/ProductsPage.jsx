@@ -22,9 +22,9 @@ function ProductsPage() {
 
           <div className="container products-page__tiles">
             {allProducts.map((product) => {
-              const { id, name, image, imageAlt } = getLocalizedProduct(product, language);
+              const { id, slug, name, image, imageAlt } = getLocalizedProduct(product, language);
               return (
-                <Link key={id} to={`/products/${id}`} className="product-tile">
+                <Link key={id} to={`/products/${slug}`} className="product-tile">
                   <img src={image} alt={imageAlt} loading="lazy" />
                   <span className="product-tile__name">{name}</span>
                 </Link>

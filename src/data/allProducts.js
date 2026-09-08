@@ -185,7 +185,17 @@ const productCatalog = [
   },
   ];
 
-export const allProducts = productCatalog;
+/** URL slug: "Mandeļu Mākoņi" -> "mandelu-makoni". `id` stays the key for details and store data. */
+function slugify(name) {
+  return name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export const allProducts = productCatalog.map((product) => ({ ...product, slug: slugify(product.name) }));
 
 export function getLocalizedProduct(product, language) {
   const details = getProductDetails(product.id);
