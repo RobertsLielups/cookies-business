@@ -20,7 +20,7 @@ function ProductsPage() {
             </p>
           </div>
 
-          <div className="products-page__tiles">
+          <div className="container products-page__tiles">
             {allProducts.map((product) => {
               const { id, name, image, imageAlt } = getLocalizedProduct(product, language);
               return (
