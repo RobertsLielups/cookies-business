@@ -1,5 +1,6 @@
 .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: stretch; }
 .about__content { padding-right: var(--container-padding); padding-left: max(var(--container-padding), calc((100vw - var(--container-max)) / 2 + var(--container-padding))); }
+.about .section-title { line-height: .92; }
 .about__story { margin-top: var(--space-lg); color: var(--text-secondary); line-height: 1.55; }
 .about__story p + p { margin-top: var(--space-sm); }
 /* Gallery is out of flow, so the text column alone sets the row height and the strip fills it. It bleeds off the

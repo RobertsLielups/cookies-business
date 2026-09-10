@@ -1,6 +1,6 @@
 export const company = {
   name: 'Cepumbums',
-  email: 'Cepumbums@gmail.com',
+  email: 'cepumbums@gmail.com',
   phone: '+371-29-149-249',
   address: 'Ozolnieki, Jelgava',
 
