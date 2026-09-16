@@ -6,7 +6,7 @@ import '../styles/contact.css';
 function Contact() {
   const [status, setStatus] = useState('idle');
   const [errorKey, setErrorKey] = useState('');
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   function validateField(event, errorKey) {
     event.currentTarget.setCustomValidity(t(errorKey));
@@ -27,6 +27,7 @@ function Contact() {
       email: formData.get('email'),
       message: formData.get('message'),
       website: formData.get('website'),
+      language: language === 'lv' ? 'lv' : 'en',
     };
 
     setStatus('submitting');

@@ -23,7 +23,7 @@ function parseBody(body) {
 }
 
 function validateContactForm(body) {
-  const { name, email, message, website } = body;
+  const { name, email, message, website, language } = body;
 
   if (typeof name !== 'string' || !name.trim()) {
     return { errorCode: 'nameRequired' };
@@ -59,6 +59,7 @@ function validateContactForm(body) {
       email: email.trim(),
       message: message.trim(),
       website: website?.trim() ?? '',
+      language: language === 'lv' ? 'lv' : 'en',
     },
   };
 }
@@ -79,7 +80,7 @@ export default async function handler(request, response) {
     return sendJson(response, 400, { success: false, errorCode: validation.errorCode });
   }
 
-  const { name, email, message, website } = validation.value;
+  const { name, email, message, website, language } = validation.value;
 
   // Return a neutral success response so spam bots cannot detect the honeypot.
   if (website) {
@@ -114,12 +115,22 @@ export default async function handler(request, response) {
     return sendJson(response, 502, { success: false, errorCode: 'serviceUnavailable' });
   }
 
+  const confirmation = language === 'lv'
+    ? {
+      subject: 'Esam saņēmuši Jūsu ziņu | Cepumbums',
+      text: `Sveiki, ${name}!\n\nPaldies, ka sazinājāties ar Cepumbums.\n\nEsam saņēmuši Jūsu ziņu un atbildēsim, cik drīz vien iespējams.\n\nAr sirsnīgiem sveicieniem,\nCepumbums`,
+    }
+    : {
+      subject: 'We received your message | Cepumbums',
+      text: `Hello ${name},\n\nThank you for contacting Cepumbums.\n\nWe have received your message and will get back to you as soon as possible.\n\nWarm regards,\nCepumbums`,
+    };
+
   try {
     const autoReply = await resend.emails.send({
       from: CONTACT_FROM_EMAIL,
       to: [email],
-      subject: 'We received your message — Cepumbums',
-      text: `Hello ${name},\n\nThank you for contacting Cepumbums.\n\nWe have received your message and will get back to you as soon as possible.\n\nCepumbums`,
+      subject: confirmation.subject,
+      text: confirmation.text,
     });
 
     // The main message was delivered successfully. Do not make the customer retry
