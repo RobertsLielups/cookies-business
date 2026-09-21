@@ -74,15 +74,13 @@ const en = {
   errors: {
     nameRequired: 'Please enter your name.', nameTooLong: 'Your name is too long.', emailInvalid: 'Please enter a valid email address.', messageRequired: 'Please enter your message.', messageTooShort: 'Your message is too short.', messageTooLong: 'Your message is too long.', invalidSubmission: 'Invalid form submission.', requestInvalid: 'Invalid request body.', methodNotAllowed: 'Method not allowed.', serviceUnavailable: 'Unable to send your message right now. Please try again later.',
   },
-  availability: {
-    label: 'Where to buy',
+  whereToBuy: {
     title: 'Where to Buy',
-    intro: 'Find this cookie at selected stores.',
-    available: 'Available',
-    lowStock: 'Low stock',
+    intro: 'Find this product at selected stores.',
+    disclaimer: 'Product selection may vary by store.',
     openInMaps: 'Open in Maps',
     mapLabel: 'Store map',
-    empty: 'Availability information coming soon.',
+    empty: 'Store information coming soon.',
   },
   productDetail: {
     backToProducts: 'Back to all cookies',
@@ -136,7 +134,7 @@ const en = {
       { id: 'contact-form', title: '3. Contact form', paragraphs: ['The contact form sends your inquiry to the website’s server-side contact endpoint. It validates the submitted information, sends the inquiry to the configured business recipient and attempts to send a confirmation email to the address you supplied.'] },
       { id: 'why-we-use-data', title: '4. Why we use personal data', paragraphs: ['We use contact-form information to receive your inquiry, respond to you and handle the communication you requested. The current website does not use contact-form information for newsletters, advertising, profiling or marketing campaigns.'] },
       { id: 'legal-basis', title: '5. Legal basis', paragraphs: ['The lawful basis for contact-form processing has not been confirmed in the project configuration. It requires an owner and legal review before publication. It should reflect the actual purpose and relationship for each inquiry; submitting a contact form does not by itself determine the applicable GDPR Article 6 basis.'] },
-      { id: 'providers', title: '6. Service providers / recipients', paragraphs: ['Resend is used as the email delivery service for contact-form messages and confirmation emails. The website also loads fonts from Google Fonts and, on product pages that show store availability, map tiles from OpenStreetMap through Leaflet. These services may receive the technical requests needed to provide their services. The hosting/infrastructure provider is not identified in this codebase and must be confirmed before publication.'] },
+      { id: 'providers', title: '6. Service providers / recipients', paragraphs: ['Resend is used as the email delivery service for contact-form messages and confirmation emails. The website also loads fonts from Google Fonts and, on product pages that show store locations, map tiles from OpenStreetMap through Leaflet. These services may receive the technical requests needed to provide their services. The hosting/infrastructure provider is not identified in this codebase and must be confirmed before publication.'] },
       { id: 'retention', title: '7. Data retention', paragraphs: ['No contact-form retention period is configured in this project. A retention period and deletion process must be set by the owner or legal adviser before publication.'] },
       { id: 'cookies', title: '8. Cookies and similar technologies', paragraphs: ['The website uses browser localStorage for language preference and cookie-consent preference. See the Cookie Policy for the current storage list and how consent works.'] },
       { id: 'rights', title: '9. Your data protection rights', paragraphs: ['Subject to applicable law, you may have rights to request access to, rectification or erasure of your personal data; restriction of processing; objection to processing; and data portability where applicable. Where processing is based on consent, you may withdraw that consent at any time.'] },

@@ -26,12 +26,12 @@ function FitMapToStores({ stores }) {
   return null;
 }
 
-function StoreAvailabilityMap({ stores }) {
+function StoreMap({ stores }) {
   const { t } = useLanguage();
   const firstStore = stores[0];
 
   return (
-    <div className="product-availability__map" aria-label={t('availability.mapLabel')}>
+    <div className="product-where-to-buy__map" aria-label={t('whereToBuy.mapLabel')}>
       <MapContainer
         center={[firstStore.latitude, firstStore.longitude]}
         zoom={14}
@@ -57,11 +57,7 @@ function StoreAvailabilityMap({ stores }) {
             <Popup>
               <strong>{store.name}</strong>
               <br />
-              {store.address}, {store.city}
-              <br />
-              {store.status === 'available'
-                ? t('availability.available')
-                : t('availability.lowStock')}
+              {store.address}
             </Popup>
           </CircleMarker>
         ))}
@@ -70,4 +66,4 @@ function StoreAvailabilityMap({ stores }) {
   );
 }
 
-export default StoreAvailabilityMap;
+export default StoreMap;

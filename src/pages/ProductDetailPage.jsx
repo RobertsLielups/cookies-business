@@ -1,22 +1,22 @@
-import { Suspense, lazy, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { allProducts, getLocalizedProduct } from '../data/allProducts';
-import { getAvailableStoresForProduct } from '../data/stores';
+import { getStoresForProduct } from '../data/stores';
 import { useLanguage } from '../context/LanguageContext';
 import { pageMeta } from '../seo';
 import { usePageMeta } from '../utils/usePageMeta';
 import '../styles/product-detail.css';
 
 // Leaflet touches `window` on import, so the map must not be part of the prerender bundle.
-const StoreAvailabilityMap = lazy(() => import('../components/StoreAvailabilityMap'));
+const StoreMap = lazy(() => import('../components/StoreMap'));
 
-function getMapsUrl({ latitude, longitude, address, city }) {
+function getMapsUrl({ latitude, longitude, address }) {
   const location =
     Number.isFinite(latitude) && Number.isFinite(longitude)
       ? `${latitude},${longitude}`
-      : `${address}, ${city}`;
+      : address;
 
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 }
@@ -30,8 +30,10 @@ function ProductDetailPage() {
   // Slug is canonical; the old name-based id keeps existing links working.
   const sourceProduct = allProducts.find((item) => item.slug === productId || item.id === productId);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [canRenderMap, setCanRenderMap] = useState(false);
   const lightboxRef = useRef(null);
   const { language, t, localePath } = useLanguage();
+  useEffect(() => setCanRenderMap(true), []);
   usePageMeta(
     sourceProduct
       ? pageMeta(language, 'product', getLocalizedProduct(sourceProduct, language))
@@ -65,8 +67,8 @@ function ProductDetailPage() {
     { src: product.image, alt: product.imageAlt },
   ];
   const activeImage = productImages[activeImageIndex] ?? productImages[0];
-  const availableStores = getAvailableStoresForProduct(product.id);
-  const mappableStores = availableStores.filter(
+  const productStores = getStoresForProduct(product.id);
+  const mappableStores = productStores.filter(
     ({ latitude, longitude }) => Number.isFinite(latitude) && Number.isFinite(longitude),
   );
   const { details } = product;
@@ -203,52 +205,43 @@ function ProductDetailPage() {
               </div>
             </div>
 
-            <section className="product-availability" aria-labelledby="where-to-buy-title">
-              <header className="product-availability__header">
-                <h2 id="where-to-buy-title" className="product-availability__title">
-                  {t('availability.title')}
+            <section className="product-where-to-buy" aria-labelledby="where-to-buy-title">
+              <header className="product-where-to-buy__header">
+                <h2 id="where-to-buy-title" className="product-where-to-buy__title">
+                  {t('whereToBuy.title')}
                 </h2>
-                <p className="product-availability__intro">{t('availability.intro')}</p>
+                <p className="product-where-to-buy__intro">{t('whereToBuy.intro')}</p>
+                <p className="product-where-to-buy__disclaimer">{t('whereToBuy.disclaimer')}</p>
               </header>
 
-              {availableStores.length > 0 ? (
-                <div className={`product-availability__content${mappableStores.length ? '' : ' product-availability__content--list-only'}`}>
-                  <ul className="product-availability__list">
-                    {availableStores.map((store) => (
-                      <li key={store.id} className="product-availability__store">
-                        <div className="product-availability__store-details">
+              {productStores.length > 0 ? (
+                <div className={`product-where-to-buy__content${mappableStores.length ? '' : ' product-where-to-buy__content--list-only'}`}>
+                  <ul className="product-where-to-buy__list">
+                    {productStores.map((store) => (
+                      <li key={store.id} className="product-where-to-buy__store">
+                        <div className="product-where-to-buy__store-details">
                           <h3>{store.name}</h3>
-                          <address>
-                            {store.address}
-                            <br />
-                            {store.city}
-                          </address>
-                          <span className={`product-availability__status product-availability__status--${store.status}`}>
-                            <span aria-hidden="true" className="product-availability__status-dot" />
-                            {store.status === 'available'
-                              ? t('availability.available')
-                              : t('availability.lowStock')}
-                          </span>
+                          <address>{store.address}</address>
                         </div>
                         <a
-                          className="product-availability__maps-link"
+                          className="product-where-to-buy__maps-link"
                           href={getMapsUrl(store)}
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {t('availability.openInMaps')} →
+                          {t('whereToBuy.openInMaps')} →
                         </a>
                       </li>
                     ))}
                   </ul>
-                  {mappableStores.length > 0 && (
+                  {canRenderMap && mappableStores.length > 0 && (
                     <Suspense fallback={null}>
-                      <StoreAvailabilityMap stores={mappableStores} />
+                      <StoreMap stores={mappableStores} />
                     </Suspense>
                   )}
                 </div>
               ) : (
-                <p className="product-availability__empty">{t('availability.empty')}</p>
+                <p className="product-where-to-buy__empty">{t('whereToBuy.empty')}</p>
               )}
             </section>
           </div>

@@ -58,15 +58,13 @@ const lv = {
   errors: {
     nameRequired: 'Lūdzu, ievadiet savu vārdu.', nameTooLong: 'Jūsu vārds ir pārāk garš.', emailInvalid: 'Lūdzu, ievadiet derīgu e-pasta adresi.', messageRequired: 'Lūdzu, ievadiet savu ziņu.', messageTooShort: 'Jūsu ziņa ir pārāk īsa.', messageTooLong: 'Jūsu ziņa ir pārāk gara.', invalidSubmission: 'Nederīgs formas iesniegums.', requestInvalid: 'Nederīgs pieprasījums.', methodNotAllowed: 'Šī metode nav atļauta.', serviceUnavailable: 'Pašlaik ziņu nevar nosūtīt. Lūdzu, mēģiniet vēlāk.',
   },
-  availability: {
-    label: 'Kur iegādāties',
+  whereToBuy: {
     title: 'Kur iegādāties',
-    intro: 'Atrodi šo cepumu izvēlētajos veikalos.',
-    available: 'Pieejams',
-    lowStock: 'Maz atlikumā',
+    intro: 'Meklē šo produktu izvēlētajos veikalos.',
+    disclaimer: 'Sortiments veikalos var atšķirties.',
     openInMaps: 'Atvērt kartē',
     mapLabel: 'Veikalu karte',
-    empty: 'Informācija par pieejamību drīzumā.',
+    empty: 'Informācija par veikaliem drīzumā.',
   },
   productDetail: {
     backToProducts: 'Atpakaļ pie visiem cepumiem',
@@ -120,7 +118,7 @@ const lv = {
       { id: 'contact-form', title: '3. Kontaktforma', paragraphs: ['Kontaktforma nosūta jūsu pieprasījumu uz mājaslapas servera kontaktpunktu. Tas pārbauda iesniegto informāciju, nosūta pieprasījumu konfigurētajam uzņēmuma saņēmējam un mēģina nosūtīt apstiprinājuma e-pastu uz jūsu norādīto adresi.'] },
       { id: 'why-we-use-data', title: '4. Kāpēc mēs izmantojam personas datus', paragraphs: ['Kontaktformas informāciju izmantojam, lai saņemtu jūsu pieprasījumu, atbildētu jums un nodrošinātu jūsu pieprasīto saziņu. Pašreizējā mājaslapa neizmanto kontaktformas informāciju jaunumu vēstulēm, reklāmai, profilēšanai vai mārketinga kampaņām.'] },
       { id: 'legal-basis', title: '5. Tiesiskais pamats', paragraphs: ['Kontaktformas datu apstrādes tiesiskais pamats projekta konfigurācijā nav apstiprināts. Pirms publicēšanas tas jāizvērtē īpašniekam un juridiskajam konsultantam. Tam jāatspoguļo katra pieprasījuma faktiskais mērķis un attiecības; kontaktformas iesniegšana pati par sevi nenosaka piemērojamo VDAR 6. panta pamatu.'] },
-      { id: 'providers', title: '6. Pakalpojumu sniedzēji / saņēmēji', paragraphs: ['Resend tiek izmantots kā e-pasta piegādes pakalpojums kontaktformas ziņām un apstiprinājuma e-pastiem. Mājaslapa ielādē fontus no Google Fonts un produktu lapās, kur redzama veikalu pieejamība, kartes elementus no OpenStreetMap, izmantojot Leaflet. Šie pakalpojumi var saņemt tehniskos pieprasījumus, kas vajadzīgi pakalpojuma nodrošināšanai. Mitināšanas / infrastruktūras nodrošinātājs šajā kodā nav norādīts, un tas jāapstiprina pirms publicēšanas.'] },
+      { id: 'providers', title: '6. Pakalpojumu sniedzēji / saņēmēji', paragraphs: ['Resend tiek izmantots kā e-pasta piegādes pakalpojums kontaktformas ziņām un apstiprinājuma e-pastiem. Mājaslapa ielādē fontus no Google Fonts un produktu lapās, kur redzamas veikalu atrašanās vietas, kartes elementus no OpenStreetMap, izmantojot Leaflet. Šie pakalpojumi var saņemt tehniskos pieprasījumus, kas vajadzīgi pakalpojuma nodrošināšanai. Mitināšanas / infrastruktūras nodrošinātājs šajā kodā nav norādīts, un tas jāapstiprina pirms publicēšanas.'] },
       { id: 'retention', title: '7. Datu glabāšana', paragraphs: ['Šajā projektā nav konfigurēts kontaktformas datu glabāšanas termiņš. Pirms publicēšanas īpašniekam vai juridiskajam konsultantam jānosaka glabāšanas termiņš un dzēšanas kārtība.'] },
       { id: 'cookies', title: '8. Sīkdatnes un līdzīgas tehnoloģijas', paragraphs: ['Mājaslapa izmanto pārlūka localStorage valodas izvēlei un sīkdatņu piekrišanas izvēlei. Pašreizējo krātuves vienumu sarakstu un piekrišanas darbību skatiet Sīkdatņu politikā.'] },
       { id: 'rights', title: '9. Jūsu datu aizsardzības tiesības', paragraphs: ['Saskaņā ar piemērojamiem tiesību aktiem jums var būt tiesības pieprasīt piekļuvi saviem personas datiem, to labošanu vai dzēšanu, apstrādes ierobežošanu, iebilst pret apstrādi un — ja piemērojams — datu pārnesamību. Ja apstrāde balstās uz piekrišanu, jūs to varat atsaukt jebkurā laikā.'] },
