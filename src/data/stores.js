@@ -1,20 +1,131 @@
-/**
- * A store's `products` list uses the canonical product `id` values from
- * allProducts.js. The relationship means the store carries the product; it does
- * not represent current inventory.
- */
 export const stores = [
   {
-    id: 'dabigi-produkti-barona-41-43',
-    name: 'Dabigi produkti',
-    address: 'Krišjāņa Barona iela 41/43, Centra rajons, Rīga, LV-1011',
+    id: 'dabigi-produkti-barona',
+    name: 'Dabīgi produkti',
+    address: 'Krišjāņa Barona iela 41/43, Rīga, LV-1011',
     city: 'Rīga',
-    latitude: 56.955126,
-    longitude: 24.12874,
-    products: ['Mandeļu Mākoņi'],
+    latitude: 56.9551258,
+    longitude: 24.1287401,
+  },
+  {
+    id: 'bunas-dzirnavu',
+    name: 'Būņas',
+    address: 'Dzirnavu iela 34A, Rīga, LV-1010',
+    city: 'Rīga',
+    latitude: 56.9583794,
+    longitude: 24.1129669,
+  },
+  {
+    id: 'lauku-produkti-bikernieku',
+    name: 'Lauku produkti',
+    address: 'Biķernieku iela 37, Rīga, LV-1039',
+    city: 'Rīga',
+    latitude: 56.9706580,
+    longitude: 24.1771780,
+  },
+  {
+    id: 'brokolis-jomas',
+    name: 'Brokolis',
+    address: 'Jomas iela 74, Jūrmala, LV-2015',
+    city: 'Jūrmala',
+    latitude: 56.9740410,
+    longitude: 23.8081465,
+  },
+  {
+    id: 'drusti-valdemara',
+    name: 'Drusti',
+    address: 'Krišjāņa Valdemāra iela 112, Rīga, LV-1013',
+    city: 'Rīga',
+    latitude: 56.9745565,
+    longitude: 24.1369197,
+  },
+  {
+    id: 'drusti-stirnu',
+    name: 'Drusti',
+    address: 'Stirnu iela 26, Rīga, LV-1084',
+    city: 'Rīga',
+    latitude: 56.9587143,
+    longitude: 24.1858904,
+  },
+  {
+    id: 'drusti-jelgavas-tirgus',
+    name: 'Drusti',
+    address: 'Jelgavas tirgus, Zemgales prospekts 19A, Jelgava, LV-3001',
+    city: 'Jelgava',
+    latitude: 56.6417519,
+    longitude: 23.7339994,
+  },
+  {
+    id: 'top-ozolnieki',
+    name: 'TOP Ozolnieki',
+    address: 'Skolas iela 1B, Ozolnieki, Jelgavas novads, LV-3018',
+    city: 'Ozolnieki',
+    latitude: 56.6919901,
+    longitude: 23.7877162,
+  },
+  {
+    id: 'db-daba-riga-elizabetes',
+    name: 'DB Daba',
+    address: 'Elizabetes iela 25, Rīga, LV-1010',
+    city: 'Rīga',
+    latitude: 56.9584270,
+    longitude: 24.1080320,
+  },
+  {
+    id: 'db-daba-valmiera',
+    name: 'DB Daba',
+    address: 'Rīgas iela 30, Valmiera, LV-4201',
+    city: 'Valmiera',
+    latitude: 57.537702,
+    longitude: 25.414018,
+  },
+  {
+    id: 'db-daba-jelgava-pasta',
+    name: 'DB Daba',
+    address: 'Pasta iela 51 K-10, Jelgava, LV-3001',
+    city: 'Jelgava',
+    // Supplied approximate coordinates for the Pasta iela 51 complex.
+    latitude: 56.6464954,
+    longitude: 23.7269113,
+  },
+  {
+    id: 'db-daba-liepaja',
+    name: 'DB Daba',
+    address: 'T/C Kurzeme, Lielā iela 13, Liepāja, LV-3401',
+    city: 'Liepāja',
+    latitude: 56.5074888,
+    longitude: 21.0106970,
+  },
+  {
+    id: 'db-daba-ventspils',
+    name: 'DB Daba',
+    address: 'Annas iela 2, Ventspils, LV-3601',
+    city: 'Ventspils',
+    latitude: 57.39477,
+    longitude: 21.56694,
+  },
+  {
+    id: 'db-daba-tukums',
+    name: 'DB Daba',
+    address: 'Elizabetes iela 14, Tukums, LV-3101',
+    city: 'Tukums',
+    latitude: 56.96686,
+    longitude: 23.15483,
+  },
+  {
+    id: 'db-daba-ogre',
+    name: 'DB Daba',
+    address: 'T/C Dauga, Rīgas iela 23, Ogre, LV-5001',
+    city: 'Ogre',
+    latitude: 56.8166054,
+    longitude: 24.5849434,
+  },
+  {
+    id: 'db-daba-jelgava-raf',
+    name: 'DB Daba',
+    address: 'T/C RAF Centrs, Rīgas iela 48, Jelgava, LV-3004',
+    city: 'Jelgava',
+    latitude: 56.6680123,
+    longitude: 23.7610315,
   },
 ];
-
-export function getStoresForProduct(productId) {
-  return stores.filter(({ products }) => products.includes(productId));
-}

@@ -2,8 +2,9 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import StorePicker from '../components/StorePicker';
 import { allProducts, getLocalizedProduct } from '../data/allProducts';
-import { getStoresForProduct } from '../data/stores';
+import { stores } from '../data/stores';
 import { useLanguage } from '../context/LanguageContext';
 import { pageMeta } from '../seo';
 import { usePageMeta } from '../utils/usePageMeta';
@@ -11,15 +12,9 @@ import '../styles/product-detail.css';
 
 // Leaflet touches `window` on import, so the map must not be part of the prerender bundle.
 const StoreMap = lazy(() => import('../components/StoreMap'));
-
-function getMapsUrl({ latitude, longitude, address }) {
-  const location =
-    Number.isFinite(latitude) && Number.isFinite(longitude)
-      ? `${latitude},${longitude}`
-      : address;
-
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
-}
+const mappableStores = stores.filter(
+  ({ latitude, longitude }) => Number.isFinite(latitude) && Number.isFinite(longitude),
+);
 
 function formatNumber(value, language) {
   return new Intl.NumberFormat(language, { maximumFractionDigits: 3 }).format(value);
@@ -31,6 +26,7 @@ function ProductDetailPage() {
   const sourceProduct = allProducts.find((item) => item.slug === productId || item.id === productId);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [canRenderMap, setCanRenderMap] = useState(false);
+  const [selectedStoreId, setSelectedStoreId] = useState('');
   const lightboxRef = useRef(null);
   const { language, t, localePath } = useLanguage();
   useEffect(() => setCanRenderMap(true), []);
@@ -67,10 +63,6 @@ function ProductDetailPage() {
     { src: product.image, alt: product.imageAlt },
   ];
   const activeImage = productImages[activeImageIndex] ?? productImages[0];
-  const productStores = getStoresForProduct(product.id);
-  const mappableStores = productStores.filter(
-    ({ latitude, longitude }) => Number.isFinite(latitude) && Number.isFinite(longitude),
-  );
   const { details } = product;
   const nutritionRows = details
     ? [
@@ -214,29 +206,19 @@ function ProductDetailPage() {
                 <p className="product-where-to-buy__disclaimer">{t('whereToBuy.disclaimer')}</p>
               </header>
 
-              {productStores.length > 0 ? (
+              {stores.length > 0 ? (
                 <div className={`product-where-to-buy__content${mappableStores.length ? '' : ' product-where-to-buy__content--list-only'}`}>
-                  <ul className="product-where-to-buy__list">
-                    {productStores.map((store) => (
-                      <li key={store.id} className="product-where-to-buy__store">
-                        <div className="product-where-to-buy__store-details">
-                          <h3>{store.name}</h3>
-                          <address>{store.address}</address>
-                        </div>
-                        <a
-                          className="product-where-to-buy__maps-link"
-                          href={getMapsUrl(store)}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {t('whereToBuy.openInMaps')} →
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <StorePicker
+                    stores={stores}
+                    selectedStoreId={selectedStoreId}
+                    onSelect={setSelectedStoreId}
+                  />
                   {canRenderMap && mappableStores.length > 0 && (
                     <Suspense fallback={null}>
-                      <StoreMap stores={mappableStores} />
+                      <StoreMap
+                        selectedStoreId={selectedStoreId}
+                        stores={mappableStores}
+                      />
                     </Suspense>
                   )}
                 </div>
