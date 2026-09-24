@@ -27,7 +27,6 @@
 .store-picker__trigger-copy { display: grid; min-width: 0; flex: 1; gap: var(--space-2xs); }
 .store-picker__eyebrow { color: var(--text-secondary); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.12em; line-height: 1.4; text-transform: uppercase; }
 .store-picker__value { display: grid; gap: var(--space-2xs); font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
-.store-picker__address { color: var(--text-secondary); font-size: var(--text-base); font-weight: 400; letter-spacing: normal; line-height: 1.4; overflow-wrap: anywhere; }
 .store-picker__chevron { flex: 0 0 1.25rem; width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform var(--transition); }
 .store-picker--open .store-picker__chevron { transform: rotate(180deg); }
 
@@ -57,23 +56,15 @@
 .store-picker__search-wrap input:focus-visible { outline: none; }
 .store-picker__list { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 var(--space-xs) var(--space-xs); scrollbar-width: thin; scrollbar-color: var(--brand-gold-60) transparent; }
 .store-picker__list:focus-visible { outline: 1px solid var(--brand-gold); outline-offset: -2px; }
-.store-picker__group { margin-top: var(--space-xs); }
-.store-picker__city { padding: var(--space-xs) var(--space-sm) var(--space-2xs); color: var(--text-secondary); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 .store-picker__option { display: flex; min-height: 3.25rem; align-items: center; justify-content: space-between; gap: var(--space-xs); padding: 0.75rem var(--space-sm); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; transition: background-color 120ms ease, border-color 120ms ease; }
 .store-picker__option:hover { background: var(--surface-muted); }
 .store-picker__option[aria-selected='true'] { background: var(--brand-gold-20); }
 .store-picker__option--active { border-color: var(--brand-gold-60); background: var(--surface-muted); }
 .store-picker__option-copy { display: grid; gap: 0.2rem; min-width: 0; }
 .store-picker__option-name { font-size: var(--text-lg); font-weight: 600; line-height: 1.25; }
-.store-picker__option-address { color: var(--text-secondary); font-size: var(--text-base); line-height: 1.4; overflow-wrap: anywhere; }
 .store-picker__check { flex-shrink: 0; color: var(--color-accent-dark); font-size: var(--text-lg); }
 .store-picker__results { flex-shrink: 0; padding: var(--space-xs) var(--space-md); border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.4; }
-.store-picker__footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--space-sm); margin-top: var(--space-xs); color: var(--text-secondary); font-size: var(--text-base); }
-.store-picker__footer p { padding-block: var(--space-xs); line-height: 1.5; }
-.store-picker__reset, .store-picker__maps-link { display: inline-flex; min-height: 2.75rem; align-items: center; gap: var(--space-2xs); padding-block: var(--space-xs); font-size: var(--text-base); text-decoration: underline; text-decoration-color: var(--brand-gold-60); text-underline-offset: 0.3em; transition: color var(--transition); }
-.store-picker__reset { color: var(--text-primary); }
-.store-picker__reset:hover, .store-picker__maps-link:hover { color: var(--color-accent-dark); }
-.store-picker__trigger:focus-visible, .store-picker__reset:focus-visible, .store-picker__maps-link:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 4px; }
+.store-picker__trigger:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 4px; }
 
 @keyframes store-picker-reveal {
   from { opacity: 0; transform: translateY(4px); }
@@ -93,3 +84,5 @@
   .store-picker__panel { animation: none; }
   .store-picker__trigger, .store-picker__chevron, .store-picker__option { transition: none; }
 }
+
+.store-picker--city .store-picker__option-name { font-size: var(--text-xl); font-weight: 600; }

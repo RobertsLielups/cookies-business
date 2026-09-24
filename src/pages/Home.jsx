@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
+import WhereToBuy from '../components/WhereToBuy';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import { useLanguage } from '../context/LanguageContext';
@@ -17,6 +18,7 @@ function Home() {
         <div className="site-main__content">
           <Hero />
           <About />
+          <WhereToBuy />
           <Contact />
         </div>
       </main>

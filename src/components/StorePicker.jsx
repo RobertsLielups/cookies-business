@@ -6,19 +6,12 @@ function normalizeSearch(value) {
   return value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim();
 }
 
-function groupStores(stores, query) {
+function filterOptions(options, query) {
   const terms = normalizeSearch(query).split(/\s+/).filter(Boolean);
-  const groups = new Map();
-
-  stores.forEach((store) => {
-    const text = normalizeSearch(`${store.name} ${store.city} ${store.address}`);
-    if (terms.every((term) => text.includes(term))) {
-      if (!groups.has(store.city)) groups.set(store.city, []);
-      groups.get(store.city).push(store);
-    }
+  return options.filter((option) => {
+    const text = normalizeSearch(option.name);
+    return terms.every((term) => text.includes(term));
   });
-
-  return [...groups].sort(([cityA], [cityB]) => cityA.localeCompare(cityB, 'lv'));
 }
 
 function LocationIcon() {
@@ -30,7 +23,7 @@ function LocationIcon() {
   );
 }
 
-function StorePicker({ stores, selectedStoreId, onSelect }) {
+function StorePicker({ stores, value, onSelect }) {
   const { t } = useLanguage();
   const id = useId();
   const rootRef = useRef(null);
@@ -41,10 +34,15 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
   const [query, setQuery] = useState('');
   const [activeId, setActiveId] = useState('');
   const [panelLayout, setPanelLayout] = useState({ above: false, height: 400 });
-  const selectedStore = stores.find((store) => store.id === selectedStoreId);
-  const groups = groupStores(stores, query);
-  const matchingStores = groups.flatMap(([, cityStores]) => cityStores);
-  const optionIds = ['', ...matchingStores.map((store) => store.id)];
+  const options = [...new Set(stores.map((store) => store.city))]
+    .sort((a, b) => a.localeCompare(b, 'lv'))
+    .map((city) => ({ id: city, name: city }));
+  const selectedCity = options.find((option) => option.id === value);
+  const matchingCities = filterOptions(options, query);
+  const label = t('whereToBuy.cityLabel');
+  const placeholder = t('whereToBuy.selectCity');
+  const searchLabel = t('whereToBuy.searchCities');
+  const optionIds = ['', ...matchingCities.map((store) => store.id)];
   const currentActiveId = optionIds.includes(activeId) ? activeId : '';
   const optionId = (storeId) => `${id}-option-${storeId || 'all'}`;
 
@@ -53,14 +51,14 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
     if (restoreFocus) triggerRef.current?.focus({ preventScroll: true });
   }
 
-  function chooseStore(storeId) {
+  function chooseCity(storeId) {
     onSelect(storeId);
     closePicker(true);
   }
 
   function openPicker() {
     setQuery('');
-    setActiveId(selectedStoreId);
+    setActiveId(value);
     setIsOpen(true);
   }
 
@@ -68,7 +66,8 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
     if (!isOpen) return undefined;
 
     const mobile = window.matchMedia('(max-width: 900px)').matches;
-    if (mobile) rootRef.current.scrollIntoView({ block: 'start', behavior: 'instant' });
+    const inline = Boolean(rootRef.current.closest('.where-to-buy'));
+    if (mobile || inline) rootRef.current.scrollIntoView({ block: 'start', behavior: 'instant' });
 
     function positionPanel() {
       const viewport = window.visualViewport;
@@ -79,7 +78,7 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
       const headerHeight = parseFloat(getComputedStyle(rootRef.current).scrollMarginTop);
       const above = rect.top - viewportTop - headerHeight - 16;
       const isMobile = window.matchMedia('(max-width: 900px)').matches;
-      const openAbove = !isMobile && below < 280 && above > below;
+      const openAbove = !isMobile && !inline && below < 280 && above > below;
       setPanelLayout({
         above: openAbove,
         height: isMobile
@@ -134,7 +133,7 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
       setActiveId(event.key === 'Home' ? optionIds[0] : optionIds.at(-1));
     } else if (event.key === 'Enter' || (!searching && event.key === ' ')) {
       event.preventDefault();
-      chooseStore(currentActiveId);
+      chooseCity(currentActiveId);
     }
   }
 
@@ -145,16 +144,15 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
         key={storeId}
         id={optionId(storeId)}
         role="option"
-        aria-selected={selectedStoreId === storeId}
+        aria-selected={value === storeId}
         className={`store-picker__option${currentActiveId === storeId ? ' store-picker__option--active' : ''}`}
         onMouseDown={(event) => event.preventDefault()}
-        onClick={() => chooseStore(storeId)}
+        onClick={() => chooseCity(storeId)}
       >
         <span className="store-picker__option-copy">
           <span className="store-picker__option-name">{store?.name ?? t('whereToBuy.allLocations')}</span>
-          {store && <span className="store-picker__option-address">{store.address}</span>}
         </span>
-        {selectedStoreId === storeId && <span className="store-picker__check" aria-hidden="true">✓</span>}
+        {value === storeId && <span className="store-picker__check" aria-hidden="true">✓</span>}
       </div>
     );
   }
@@ -162,7 +160,7 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
   return (
     <div
       ref={rootRef}
-      className={`store-picker${isOpen ? ' store-picker--open' : ''}`}
+      className={`store-picker store-picker--city${isOpen ? ' store-picker--open' : ''}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) closePicker();
       }}
@@ -193,10 +191,9 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
         >
           <span className="store-picker__pin"><LocationIcon /></span>
           <span className="store-picker__trigger-copy">
-            <span id={`${id}-label`} className="store-picker__eyebrow">{t('whereToBuy.storeLabel')}</span>
+            <span id={`${id}-label`} className="store-picker__eyebrow">{label}</span>
             <span id={`${id}-value`} className="store-picker__value">
-              <span>{selectedStore?.name ?? t('whereToBuy.selectStore')}</span>
-              {selectedStore && <span className="store-picker__address">{selectedStore.address}</span>}
+              <span>{selectedCity?.name ?? placeholder}</span>
             </span>
           </span>
           <svg className="store-picker__chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" /></svg>
@@ -209,9 +206,6 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
             aria-labelledby={`${id}-label`}
             className={`store-picker__panel${panelLayout.above ? ' store-picker__panel--above' : ''}`}
             style={{ '--picker-panel-height': `${panelLayout.height}px` }}
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) closePicker();
-            }}
           >
             <div className="store-picker__search-wrap">
               <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 4 4" /></svg>
@@ -219,19 +213,19 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
                 ref={searchRef}
                 type="text"
                 role="combobox"
-                aria-label={t('whereToBuy.searchStores')}
+                aria-label={searchLabel}
                 aria-autocomplete="list"
                 aria-expanded="true"
                 aria-controls={`${id}-list`}
                 aria-activedescendant={optionId(currentActiveId)}
-                placeholder={t('whereToBuy.searchStores')}
+                placeholder={searchLabel}
                 value={query}
                 autoComplete="off"
                 spellCheck="false"
                 onChange={(event) => {
                   const nextQuery = event.target.value;
                   setQuery(nextQuery);
-                  setActiveId(groupStores(stores, nextQuery)[0]?.[1][0]?.id ?? '');
+                  setActiveId(filterOptions(options, nextQuery)[0]?.id ?? '');
                 }}
                 onKeyDown={onOptionKeyDown}
               />
@@ -240,44 +234,23 @@ function StorePicker({ stores, selectedStoreId, onSelect }) {
               ref={listRef}
               id={`${id}-list`}
               role="listbox"
-              aria-label={t('whereToBuy.storeLabel')}
+              aria-label={label}
               aria-activedescendant={optionId(currentActiveId)}
               tabIndex={0}
               className="store-picker__list"
               onKeyDown={onOptionKeyDown}
             >
               {renderOption(null)}
-              {groups.map(([city, cityStores], index) => (
-                <div key={city} role="group" aria-labelledby={`${id}-city-${index}`} className="store-picker__group">
-                  <div id={`${id}-city-${index}`} className="store-picker__city">{city}</div>
-                  {cityStores.map(renderOption)}
-                </div>
-              ))}
+              {matchingCities.map(renderOption)}
             </div>
             <p className="store-picker__results" role="status">
-              {matchingStores.length ? t('whereToBuy.searchResults', { count: matchingStores.length }) : t('whereToBuy.noResults')}
+              {matchingCities.length ? t('whereToBuy.cityResults', { count: matchingCities.length }) : t('whereToBuy.noCities')}
             </p>
           </div>
         )}
       </div>
 
-      <div className="store-picker__footer">
-        {selectedStore ? (
-          <>
-            <button type="button" className="store-picker__reset" onClick={() => onSelect('')}>
-              <span aria-hidden="true">↗</span> {t('whereToBuy.allLocations')}
-            </button>
-            <a
-              className="store-picker__maps-link"
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedStore.latitude},${selectedStore.longitude}`)}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t('whereToBuy.openInMaps')} <span aria-hidden="true">↗</span>
-            </a>
-          </>
-        ) : <p>{t('whereToBuy.pickerHint')}</p>}
-      </div>
+
     </div>
   );
 }

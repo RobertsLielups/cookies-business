@@ -1,20 +1,12 @@
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import StorePicker from '../components/StorePicker';
 import { allProducts, getLocalizedProduct } from '../data/allProducts';
-import { stores } from '../data/stores';
 import { useLanguage } from '../context/LanguageContext';
 import { pageMeta } from '../seo';
 import { usePageMeta } from '../utils/usePageMeta';
 import '../styles/product-detail.css';
-
-// Leaflet touches `window` on import, so the map must not be part of the prerender bundle.
-const StoreMap = lazy(() => import('../components/StoreMap'));
-const mappableStores = stores.filter(
-  ({ latitude, longitude }) => Number.isFinite(latitude) && Number.isFinite(longitude),
-);
 
 function formatNumber(value, language) {
   return new Intl.NumberFormat(language, { maximumFractionDigits: 3 }).format(value);
@@ -25,11 +17,8 @@ function ProductDetailPage() {
   // Slug is canonical; the old name-based id keeps existing links working.
   const sourceProduct = allProducts.find((item) => item.slug === productId || item.id === productId);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [canRenderMap, setCanRenderMap] = useState(false);
-  const [selectedStoreId, setSelectedStoreId] = useState('');
   const lightboxRef = useRef(null);
   const { language, t, localePath } = useLanguage();
-  useEffect(() => setCanRenderMap(true), []);
   usePageMeta(
     sourceProduct
       ? pageMeta(language, 'product', getLocalizedProduct(sourceProduct, language))
@@ -197,35 +186,6 @@ function ProductDetailPage() {
               </div>
             </div>
 
-            <section className="product-where-to-buy" aria-labelledby="where-to-buy-title">
-              <header className="product-where-to-buy__header">
-                <h2 id="where-to-buy-title" className="product-where-to-buy__title">
-                  {t('whereToBuy.title')}
-                </h2>
-                <p className="product-where-to-buy__intro">{t('whereToBuy.intro')}</p>
-                <p className="product-where-to-buy__disclaimer">{t('whereToBuy.disclaimer')}</p>
-              </header>
-
-              {stores.length > 0 ? (
-                <div className={`product-where-to-buy__content${mappableStores.length ? '' : ' product-where-to-buy__content--list-only'}`}>
-                  <StorePicker
-                    stores={stores}
-                    selectedStoreId={selectedStoreId}
-                    onSelect={setSelectedStoreId}
-                  />
-                  {canRenderMap && mappableStores.length > 0 && (
-                    <Suspense fallback={null}>
-                      <StoreMap
-                        selectedStoreId={selectedStoreId}
-                        stores={mappableStores}
-                      />
-                    </Suspense>
-                  )}
-                </div>
-              ) : (
-                <p className="product-where-to-buy__empty">{t('whereToBuy.empty')}</p>
-              )}
-            </section>
           </div>
         </section>
       </main>

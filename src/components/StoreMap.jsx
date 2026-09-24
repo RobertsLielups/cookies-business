@@ -12,20 +12,23 @@ import { useLanguage } from '../context/LanguageContext';
 const mapPadding = [32, 32];
 const selectedStoreZoom = 14;
 
-function StoreMapController({ markerRefs, selectedStoreId, stores }) {
+function StoreMapController({ markerRefs, selectedStoreId, selectedCity, visible, stores }) {
   const map = useMap();
 
   useEffect(() => {
-    if (stores.length === 0) return undefined;
+    if (!visible || stores.length === 0) return undefined;
 
-    const storeBounds = stores.map(({ latitude, longitude }) => [latitude, longitude]);
+    const cityStores = selectedCity ? stores.filter((store) => store.city === selectedCity) : stores;
+    const storeBounds = (cityStores.length ? cityStores : stores)
+      .map(({ latitude, longitude }) => [latitude, longitude]);
     const selectedStore = stores.find(({ id }) => id === selectedStoreId);
 
     map.stop();
+    map.invalidateSize();
 
     if (!selectedStore) {
       map.closePopup();
-      map.fitBounds(storeBounds, { padding: mapPadding });
+      map.fitBounds(storeBounds, { padding: mapPadding, maxZoom: selectedStoreZoom });
       return undefined;
     }
 
@@ -41,18 +44,18 @@ function StoreMapController({ markerRefs, selectedStoreId, stores }) {
     );
 
     return () => map.off('moveend', openSelectedPopup);
-  }, [map, markerRefs, selectedStoreId, stores]);
+  }, [map, markerRefs, selectedStoreId, selectedCity, visible, stores]);
 
   return null;
 }
 
-function StoreMap({ selectedStoreId, stores }) {
+function StoreMap({ selectedStoreId, selectedCity = '', visible = true, stores }) {
   const { t } = useLanguage();
   const markerRefs = useRef(new Map());
   const storeBounds = stores.map(({ latitude, longitude }) => [latitude, longitude]);
 
   return (
-    <div className="product-where-to-buy__map" aria-label={t('whereToBuy.mapLabel')}>
+    <div className="where-to-buy__map" aria-label={t('whereToBuy.mapLabel')}>
       <MapContainer
         bounds={storeBounds}
         boundsOptions={{ padding: mapPadding }}
@@ -65,6 +68,8 @@ function StoreMap({ selectedStoreId, stores }) {
         <StoreMapController
           markerRefs={markerRefs}
           selectedStoreId={selectedStoreId}
+          selectedCity={selectedCity}
+          visible={visible}
           stores={stores}
         />
         {stores.map((store) => (
