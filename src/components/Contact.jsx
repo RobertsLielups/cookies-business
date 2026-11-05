@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { company } from '../data/company';
 import { useLanguage } from '../context/LanguageContext';
+import TurnstileWidget from './TurnstileWidget';
 import '../styles/contact.css';
 
 function Contact() {
   const [status, setStatus] = useState('idle');
   const [errorKey, setErrorKey] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [botProtectionUnavailable, setBotProtectionUnavailable] = useState(false);
+  const turnstileRef = useRef(null);
   const { t, language } = useLanguage();
+
+  const handleTurnstileToken = useCallback((token) => {
+    setTurnstileToken(token);
+    if (token) setBotProtectionUnavailable(false);
+  }, []);
+
+  const handleTurnstileUnavailable = useCallback(() => {
+    setBotProtectionUnavailable(true);
+    setTurnstileToken('');
+  }, []);
 
   function validateField(event, errorKey) {
     event.currentTarget.setCustomValidity(t(errorKey));
@@ -20,6 +34,12 @@ function Contact() {
     event.preventDefault();
     if (status === 'submitting') return;
 
+    if (!turnstileToken) {
+      setErrorKey('errors.botVerificationFailed');
+      setStatus('error');
+      return;
+    }
+
     const form = event.currentTarget;
     const formData = new FormData(form);
     const payload = {
@@ -28,6 +48,7 @@ function Contact() {
       message: formData.get('message'),
       website: formData.get('website'),
       language: language === 'lv' ? 'lv' : 'en',
+      turnstileToken,
     };
 
     setStatus('submitting');
@@ -52,6 +73,9 @@ function Contact() {
     } catch {
       setErrorKey('contact.fallbackError');
       setStatus('error');
+    } finally {
+      setTurnstileToken('');
+      turnstileRef.current?.reset();
     }
   }
 
@@ -102,6 +126,7 @@ function Contact() {
                     id="name"
                     name="name"
                     required
+                    maxLength={100}
                     autoComplete="name"
                     placeholder={t('contact.namePlaceholder')}
                     onInvalid={(event) => validateField(event, 'errors.nameRequired')}
@@ -119,6 +144,7 @@ function Contact() {
                     id="email"
                     name="email"
                     required
+                    maxLength={254}
                     autoComplete="email"
                     placeholder={t('contact.emailPlaceholder')}
                     onInvalid={(event) => validateField(event, 'errors.emailInvalid')}
@@ -135,6 +161,8 @@ function Contact() {
                     id="message"
                     name="message"
                     required
+                    minLength={10}
+                    maxLength={5000}
                     placeholder={t('contact.messagePlaceholder')}
                     onInvalid={(event) => validateField(event, 'errors.messageRequired')}
                     onInput={clearFieldValidation}
@@ -143,8 +171,21 @@ function Contact() {
 
                 <div className="contact__honeypot" aria-hidden="true">
                   <label htmlFor="website" lang="en">Website</label>
-                  <input id="website" name="website" type="text" tabIndex="-1" autoComplete="off" />
+                  <input id="website" name="website" type="text" tabIndex="-1" autoComplete="off" maxLength={200} />
                 </div>
+
+                <TurnstileWidget
+                  ref={turnstileRef}
+                  language={language}
+                  onTokenChange={handleTurnstileToken}
+                  onUnavailable={handleTurnstileUnavailable}
+                />
+
+                {botProtectionUnavailable && (
+                  <p className="contact__error" role="alert">
+                    {t('contact.verificationUnavailable')}
+                  </p>
+                )}
 
                 {status === 'error' && (
                   <p className="contact__error" role="alert" aria-live="assertive">
@@ -152,7 +193,11 @@ function Contact() {
                   </p>
                 )}
 
-                <button type="submit" className="btn btn--primary" disabled={status === 'submitting'}>
+                <button
+                  type="submit"
+                  className="btn btn--primary"
+                  disabled={status === 'submitting' || botProtectionUnavailable}
+                >
                   {status === 'submitting' ? t('common.sending') : t('common.sendMessage')}
                 </button>
                 <p className="contact__privacy">{t('contact.privacy')}</p>

@@ -24,7 +24,7 @@ const lv = {
     description: 'Roku darbs cepumi no augstvērtīgām sastāvdaļām un ģimenes receptēm.',
   },
   homepage: {
-    heroEyebrow: 'Ģimenes konditoreja', heroDescription: 'Cepti ar rūpēm.', heroCta: 'Apskatīt cepumus', heroContact: 'Sazināties', collectionLabel: 'Mūsu kolekcija', collectionTitle: 'Cepumi, ko baudīt nesteidzoties', collectionDescription: 'Katru garšu cepam nelielās partijās, izmantojot īstu sviestu, augstvērtīgu šokolādi un pacietību, ko sniedz tikai ģimenes virtuve.', carouselControls: 'Produktu karuseļa vadība', previousCookies: 'Rādīt iepriekšējos cepumus', nextCookies: 'Rādīt vairāk cepumu', featuredCookies: 'Izceltie cepumi',
+    heroEyebrow: 'Ģimenes konditoreja', heroCta: 'Apskatīt cepumus', heroContact: 'Sazināties', collectionLabel: 'Mūsu kolekcija', collectionTitle: 'Cepumi, ko baudīt nesteidzoties', collectionDescription: 'Katru garšu cepam nelielās partijās, izmantojot īstu sviestu, augstvērtīgu šokolādi un pacietību, ko sniedz tikai ģimenes virtuve.', carouselControls: 'Produktu karuseļa vadība', previousCookies: 'Rādīt iepriekšējos cepumus', nextCookies: 'Rādīt vairāk cepumu', featuredCookies: 'Izceltie cepumi',
   },
   benefits: {
     label: 'Kāpēc izvēlēties mūs', description: 'Mēs ticam, ka lieliski cepumi rodas no labām sastāvdaļām, godīgām receptēm un rūpēm, ko spēj sniegt tikai ģimenes uzņēmums.',
@@ -35,12 +35,12 @@ const lv = {
       { title: 'Kvalitatīva ražošana', description: 'Stingri standarti no mīklas bļodas līdz iepakojumam — kvalitāte, ko var sajust.' },
     ],
   },
-  products: { pageLabel: 'Mūsu kolekcija', pageTitle: 'Cepumu sortiments', pageDescription: 'Apskatiet visu mūsu roku darba cepumu klāstu — katrs no tiem cepts nelielās partijās no augstvērtīgām sastāvdaļām un pēc ģimenes receptēm.' },
+  products: { pageLabel: 'Mūsu kolekcija', pageTitle: 'Cepumu sortiments', pageDescription: 'No kraukšķīgiem līdz maigiem, no klasikas līdz neparastākām garšām.\nAtrodi cepumu, kas uzrunā tieši tevi.' },
   about: {
     label: 'Par mums', headline: 'Mūsu stāsts sākās ar vienu cepumu',
     paragraphs: [
       'Mūsu mīlestība pret cepšanu sākās bērnībā pie ģimenes galda, kur mājās gatavoti gardumi vienmēr bija daļa no svētkiem un kopā būšanas.',
-      'Piedzimstot mūsu otrajam bērnam, šīs bērnības atmiņas atkal kļuva dzīvas. Mūsu mājās no jauna valdīja kanēļa, vaniļas un svaigi ceptu gardumu smarža, un vienkārša aizraušanās pamazām izauga par ko vairāk.',
+      'Piedzimstot mūsu otrajam bērnam, šīs bērnības atmiņas atkal kļuva dzīvas. Mājās no jauna valdīja kanēļa, vaniļas un svaigi ceptu gardumu smarža un vienkārša aizraušanās pamazām izauga par ko vairāk.',
       '2012. gadā savu ceļu sāka mūsu ģimenes uzņēmums SIA “Eiras”. Kopš tā laika esam auguši un mainījušies, bet viena lieta ir palikusi nemainīga. Vēlme radīt ar rūpēm, mīlestību un patiesu prieku par savu darbu.',
       'Mums cepšana vienmēr ir bijusi kas vairāk par saldumiem. Tā ir māju sajūta, mīļas atmiņas un mazi mirkļi, ar kuriem dalīties.',
     ],
@@ -54,9 +54,10 @@ const lv = {
     success: 'Paldies! Jūsu ziņa ir nosūtīta.',
     privacy: 'Jūsu dati tiks izmantoti tikai, lai atbildētu uz jūsu ziņu.',
     fallbackError: 'Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.',
+    verificationUnavailable: 'Botu pārbaude īslaicīgi nav pieejama. Lūdzu, mēģiniet vēlāk.',
   },
   errors: {
-    nameRequired: 'Lūdzu, ievadiet savu vārdu.', nameTooLong: 'Jūsu vārds ir pārāk garš.', emailInvalid: 'Lūdzu, ievadiet derīgu e-pasta adresi.', messageRequired: 'Lūdzu, ievadiet savu ziņu.', messageTooShort: 'Jūsu ziņa ir pārāk īsa.', messageTooLong: 'Jūsu ziņa ir pārāk gara.', invalidSubmission: 'Nederīgs formas iesniegums.', requestInvalid: 'Nederīgs pieprasījums.', methodNotAllowed: 'Šī metode nav atļauta.', serviceUnavailable: 'Pašlaik ziņu nevar nosūtīt. Lūdzu, mēģiniet vēlāk.',
+    nameRequired: 'Lūdzu, ievadiet savu vārdu.', nameTooLong: 'Jūsu vārds ir pārāk garš.', emailInvalid: 'Lūdzu, ievadiet derīgu e-pasta adresi.', messageRequired: 'Lūdzu, ievadiet savu ziņu.', messageTooShort: 'Jūsu ziņa ir pārāk īsa.', messageTooLong: 'Jūsu ziņa ir pārāk gara.', invalidSubmission: 'Nederīgs formas iesniegums.', requestInvalid: 'Nederīgs pieprasījums.', methodNotAllowed: 'Šī metode nav atļauta.', serviceUnavailable: 'Pašlaik ziņu nevar nosūtīt. Lūdzu, mēģiniet vēlāk.', botVerificationFailed: 'Lūdzu, izpildiet botu pārbaudi un mēģiniet vēlreiz.', rateLimitExceeded: 'Nosūtīts pārāk daudz ziņu. Lūdzu, mēģiniet vēlāk.',
   },
   whereToBuy: {
     title: 'Kur iegādāties',
@@ -84,7 +85,7 @@ const lv = {
     closeImage: 'Aizvērt palielināto fotoattēlu',
   },
   productDetails: {
-    story: 'Produkta apraksts',
+    story: 'Par produktu',
     ingredients: 'Sastāvdaļas',
     netWeight: 'Neto masa',
     nutrition: 'Uzturvērtība uz 100 g',
@@ -98,7 +99,7 @@ const lv = {
     comingSoon: 'Produkta informācija drīzumā.',
   },
   footer: {
-    tagline: 'Roku darbs cepumi, kas ar mīlestību tiek cepti kopš 2012. gada',
+    tagline: 'Laimīgā ceptuve kopš 2012. gada',
     companyHeading: 'Cepumbums',
     contactHeading: 'Kontakti',
     followOnSocial: 'Sekojiet Cepumbums sociālajos tīklos',
@@ -145,17 +146,17 @@ const lv = {
       { id: 'necessary', title: '3. Nepieciešamā krātuve', paragraphs: ['Valodas izvēles un sīkdatņu piekrišanas izvēles krātuve ir nepieciešama, lai atcerētos mājaslapā veiktās izvēles. Nepieciešamā krātuve vienmēr ir ieslēgta.'] },
       { id: 'analytics', title: '4. Analītikas krātuve', paragraphs: ['Mājaslapā ir analītikas piekrišanas mehānisms, taču analītikas izsekošana nav aktīva un Google Analytics sīkdatnes pašlaik netiek iestatītas. Izvēles analītikas tehnoloģijas var tikt ieviestas tikai pēc piekrišanas, un šī politika tiks atjaunināta pirms to aktivizēšanas.'] },
       { id: 'third-parties', title: '5. Trešo pušu pakalpojumi', paragraphs: ['Mājaslapa ielādē Google Fonts tipogrāfijai. Ja produkta lapā tiek rādīta veikalu karte, Leaflet pieprasa kartes elementus no OpenStreetMap. Tie ir trešo pušu pakalpojumu pieprasījumi, nevis analītikas pakalpojumi. Šis projekts nenosaka, vai šie pakalpojumu sniedzēji iestata sīkdatnes vai cik ilgi tie glabā tehnisko pieprasījumu datus.'] },
-      { id: 'consent', title: '6. Kā darbojas piekrišana', paragraphs: ['Nepieciešamā krātuve vienmēr ir ieslēgta. Analītika ir izvēles iespēja un pēc noklusējuma ir noraidīta. Piekrišanas paziņojumā varat izvēlēties Piekrist visam vai Noraidīt visu. Izvēloties Noraidīt visu, paliek ieslēgta tikai nepieciešamā krātuve.'] },
-      { id: 'change-consent', title: '7. Kā mainīt vai atsaukt piekrišanu', paragraphs: ['Lai mainītu saglabāto izvēli, notīriet Cepumbums mājaslapas krātuvi savā pārlūkā un apmeklējiet mājaslapu vēlreiz. Izvēloties Noraidīt visu, izvēles analītika paliek izslēgta.'] },
+      { id: 'consent', title: '6. Kā darbojas piekrišana', paragraphs: ['Nepieciešamā krātuve vienmēr ir ieslēgta. Analītika ir izvēles iespēja un pēc noklusējuma ir noraidīta. Piekrišanas paziņojumā varat izvēlēties Atļaut izvēles analītiku vai Tikai nepieciešamais. Izvēloties Tikai nepieciešamais, izvēles analītika paliek izslēgta.'] },
+      { id: 'change-consent', title: '7. Kā mainīt vai atsaukt piekrišanu', paragraphs: ['Lai mainītu saglabāto izvēli, notīriet Cepumbums mājaslapas krātuvi savā pārlūkā un apmeklējiet mājaslapu vēlreiz. Izvēloties Tikai nepieciešamais, izvēles analītika paliek izslēgta.'] },
       { id: 'updates', title: '8. Izmaiņas šajā politikā', paragraphs: ['Mēs varam atjaunināt šo politiku, ja mainās pārlūka krātuve vai trešo pušu pakalpojumi. Datums lapas augšdaļā parāda pēdējās atjaunināšanas datumu.'] },
       { id: 'contact', title: '9. Kontakti', paragraphs: ['Vispārīgiem jautājumiem par mājaslapu izmantojiet tālāk redzamo Cepumbums kontaktu e-pastu. Pirms publicēšanas jāapstiprina atsevišķs privātuma kontakts un juridiskā datu pārziņa informācija.'], contactEmail: true },
     ],
   },
   cookieConsent: {
     title: 'Sīkdatņu iestatījumi',
-    bannerDescription: 'Mēs izmantojam nepieciešamās sīkdatnes vietnes darbībai un pēc izvēles analītiskās sīkdatnes, lai saprastu, kā apmeklētāji izmanto Cepumbums mājaslapu.',
-    acceptAll: 'Piekrist visam',
-    rejectAll: 'Noraidīt visu',
+    bannerDescription: 'Pašlaik izmantojam pārlūka krātuvi tikai nepieciešamajām izvēlēm. Varat arī izvēlēties, vai nākotnē atļaut izvēles analītiku; pašlaik analītika nav aktīva.',
+    acceptAll: 'Atļaut izvēles analītiku',
+    rejectAll: 'Tikai nepieciešamais',
   },
 };
 

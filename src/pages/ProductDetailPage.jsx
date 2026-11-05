@@ -53,6 +53,7 @@ function ProductDetailPage() {
   ];
   const activeImage = productImages[activeImageIndex] ?? productImages[0];
   const { details } = product;
+  const ingredients = language === 'lv' ? details?.ingredientsLv : details?.ingredientsEn;
   const nutritionRows = details
     ? [
         {
@@ -142,7 +143,7 @@ function ProductDetailPage() {
                   )}
                 </header>
                 <section className="product-facts" aria-label={t('productDetails.nutrition')}>
-                  {!details || details.sourceConfidence === 'missing' ? (
+                  {!details ? (
                     <p className="product-facts__empty">{t('productDetails.comingSoon')}</p>
                   ) : (
                     <div className="product-facts__grid">
@@ -152,10 +153,10 @@ function ProductDetailPage() {
                           <p>{details.storyLv}</p>
                         </div>
                       )}
-                      {details.ingredientsLv && (
+                      {ingredients && (
                         <div className="product-facts__block">
                           <h2>{t('productDetails.ingredients')}</h2>
-                          <p lang="lv">{details.ingredientsLv}</p>
+                          <p lang={language}>{ingredients}</p>
                         </div>
                       )}
                       {details.netWeightG != null && (

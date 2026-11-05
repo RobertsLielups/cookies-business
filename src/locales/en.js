@@ -25,7 +25,6 @@ const en = {
   },
   homepage: {
     heroEyebrow: 'Family bakery',
-    heroDescription: 'Baked with care.',
     heroCta: 'Explore our cookies',
     heroContact: 'Get in touch',
     collectionLabel: 'Our collection',
@@ -70,9 +69,10 @@ const en = {
     success: 'Thank you! Your message has been sent.',
     privacy: 'Your details will only be used to respond to your message.',
     fallbackError: 'Something went wrong. Please try again.',
+    verificationUnavailable: 'Bot verification is temporarily unavailable. Please try again later.',
   },
   errors: {
-    nameRequired: 'Please enter your name.', nameTooLong: 'Your name is too long.', emailInvalid: 'Please enter a valid email address.', messageRequired: 'Please enter your message.', messageTooShort: 'Your message is too short.', messageTooLong: 'Your message is too long.', invalidSubmission: 'Invalid form submission.', requestInvalid: 'Invalid request body.', methodNotAllowed: 'Method not allowed.', serviceUnavailable: 'Unable to send your message right now. Please try again later.',
+    nameRequired: 'Please enter your name.', nameTooLong: 'Your name is too long.', emailInvalid: 'Please enter a valid email address.', messageRequired: 'Please enter your message.', messageTooShort: 'Your message is too short.', messageTooLong: 'Your message is too long.', invalidSubmission: 'Invalid form submission.', requestInvalid: 'Invalid request body.', methodNotAllowed: 'Method not allowed.', serviceUnavailable: 'Unable to send your message right now. Please try again later.', botVerificationFailed: 'Please complete the bot verification and try again.', rateLimitExceeded: 'Too many messages have been submitted. Please try again later.',
   },
   whereToBuy: {
     title: 'Where to Buy',
@@ -161,17 +161,17 @@ const en = {
       { id: 'necessary', title: '3. Necessary storage', paragraphs: ['Language preference and cookie-consent preference storage are necessary to remember the choices you make on this website. Necessary storage is always enabled.'] },
       { id: 'analytics', title: '4. Analytics storage', paragraphs: ['The website has an analytics-consent mechanism, but analytics tracking is not active and no Google Analytics cookies are currently set. Optional analytics technologies may be introduced only after consent, and this policy will be updated before they are enabled.'] },
       { id: 'third-parties', title: '5. Third-party services', paragraphs: ['The website loads Google Fonts for typography. Where a product page displays a store map, Leaflet requests map tiles from OpenStreetMap. These are third-party service requests, not analytics services. This project does not determine whether those providers set cookies or how they retain technical request data.'] },
-      { id: 'consent', title: '6. How consent works', paragraphs: ['Necessary storage is always enabled. Analytics is optional and defaults to denied. You can choose Accept all or Reject all in the consent banner. Choosing Reject all keeps only necessary storage enabled.'] },
-      { id: 'change-consent', title: '7. How to change or withdraw consent', paragraphs: ['To change a saved choice, clear the Cepumbums website storage in your browser and revisit the website. Choosing Reject all keeps optional analytics disabled.'] },
+      { id: 'consent', title: '6. How consent works', paragraphs: ['Necessary storage is always enabled. Analytics is optional and defaults to denied. You can choose Allow optional analytics or Necessary only in the consent banner. Choosing Necessary only keeps optional analytics disabled.'] },
+      { id: 'change-consent', title: '7. How to change or withdraw consent', paragraphs: ['To change a saved choice, clear the Cepumbums website storage in your browser and revisit the website. Choosing Necessary only keeps optional analytics disabled.'] },
       { id: 'updates', title: '8. Updates to this policy', paragraphs: ['We may update this policy when browser storage or third-party services change. The date at the top shows when it was last updated.'] },
       { id: 'contact', title: '9. Contact', paragraphs: ['For general website questions, use the Cepumbums contact email below. A dedicated privacy contact and legal controller information must be confirmed before publication.'], contactEmail: true },
     ],
   },
   cookieConsent: {
     title: 'Cookie preferences',
-    bannerDescription: 'We use necessary cookies to keep the website working and optional analytics cookies to understand how visitors use Cepumbums.',
-    acceptAll: 'Accept all',
-    rejectAll: 'Reject all',
+    bannerDescription: 'We currently use browser storage only for necessary preferences. You can also choose whether optional analytics may be enabled in the future; analytics is not currently active.',
+    acceptAll: 'Allow optional analytics',
+    rejectAll: 'Necessary only',
   },
 };
 

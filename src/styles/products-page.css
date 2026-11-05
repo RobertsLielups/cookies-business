@@ -1,4 +1,5 @@
 .products-page__head { max-width: none; padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--space-lg); }
+.products-page__head .section-description { white-space: pre-line; }
 /* Tile wall: the pack photos share a backdrop, so the wall reads as one image. */
 .products-page { padding-bottom: var(--section-space); }
 .products-page__tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25rem; }
@@ -6,5 +7,5 @@
 .product-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
 .product-tile:hover img { transform: scale(1.04); }
 .product-tile:focus-visible { outline-offset: -3px; }
-.product-tile__name { position: absolute; left: 1.25rem; bottom: 1rem; color: var(--text-primary); font-family: var(--font-heading); font-size: clamp(1.5rem, 2.2vw, 2.2rem); font-weight: 700; letter-spacing: -.04em; line-height: .95; text-transform: uppercase; text-shadow: 0 0 1.5rem rgba(255, 255, 255, .9); }
+.product-tile__name { position: absolute; left: 1.25rem; bottom: 1rem; color: #4d4944; font-family: var(--font-heading); font-size: clamp(1.5rem, 2.2vw, 2.2rem); font-weight: 600; letter-spacing: -.04em; line-height: .95; text-transform: uppercase; text-shadow: 0 0 1.5rem rgba(255, 255, 255, .9); }
 @media (max-width: 768px) { .products-page__tiles { grid-template-columns: repeat(2, 1fr); } }

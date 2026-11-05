@@ -9,8 +9,7 @@ const productCatalog = [
   {
     id: 'Mandeļu Mākoņi',
     name: 'Mandeļu Mākoņi',
-    description:
-      'Delicate, cloud-like meringues with a crisp shell and a soft, airy centre.',
+    description: '',
     badge: 'Best Seller',
     image: '/media/products/mandelu-makoni-pack.webp',
     imageAlt: 'Two packages of Mandeļu Mākoņi meringues',
@@ -29,8 +28,7 @@ const productCatalog = [
   {
     id: 'Sēkliņu Brošas',
     name: 'Sēkliņu Brošas',
-    description:
-      'Toasted pecans, soft caramel centers, and a whisper of sea salt in every bite.',
+    description: '',
     badge: 'Seasonal',
     image: '/media/products/seklinu-brosas-pack.webp',
     imageAlt: 'Two packages of Sēkliņu Brošas seed crackers',
@@ -49,8 +47,7 @@ const productCatalog = [
   {
     id: 'Griķu Pogas',
     name: 'Griķu Pogas',
-    description:
-      'Deep cocoa flavor with melted dark chocolate chunks for true chocolate lovers.',
+    description: '',
     badge: 'New',
     image: '/media/products/griku-pogas-pack.webp',
     imageAlt: 'Two packages of Griķu Pogas cookies',
@@ -69,8 +66,7 @@ const productCatalog = [
   {
     id: 'Mandeļu Mākoņi Mazie',
     name: 'Mandeļu Mākoņi Mazie',
-    description:
-      'Delicate shortbread infused with bright lemon zest and fragrant lavender.',
+    description: '',
     badge: 'Limited',
     image: '/media/products/mandelu-makoni-mazie-pack.webp',
     imageAlt: 'Two packages of Mandeļu Mākoņi cookies',
@@ -89,8 +85,7 @@ const productCatalog = [
   {
     id: 'Kokosa Bučas',
     name: 'Kokosa Bučas',
-    description:
-      'Hearty rolled oats, plump raisins, and toasted walnuts in a warmly spiced dough.',
+    description: '',
     badge: 'Classic',
     image: '/media/products/kokosa-bucas-pack.webp',
     imageAlt: 'Two packages of Kokosa Bučas coconut cookies',
@@ -109,8 +104,7 @@ const productCatalog = [
   {
     id: 'Auzu-Cidoniju',
     name: 'Auzu-Cidoniju',
-    description:
-      'Soft, pillowy cookies rolled in cinnamon sugar with a tender, crackled top.',
+    description: '',
     badge: 'Fan Favorite',
     image: '/media/products/auzu-cidoniju-pack.webp',
     imageAlt: 'Two packages of Auzu-Cidoniju cookies',
@@ -129,8 +123,7 @@ const productCatalog = [
   {
     id: 'VEGrauzis',
     name: 'VEGrauzis',
-    description:
-      'Creamy peanut butter dough studded with milk chocolate chips and a pinch of sea salt.',
+    description: '',
     badge: null,
     image: '/media/products/vegrauzis-pack.webp',
     imageAlt: 'Packaged VEGrauzis cookie',
@@ -148,8 +141,7 @@ const productCatalog = [
   {
     id: 'Lielais Sēklu',
     name: 'Lielais Sēklu',
-    description:
-      'Buttery cookies loaded with creamy white chocolate and crunchy macadamia nuts.',
+    description: '',
     badge: null,
     image: '/media/products/lielais-seklu-pack.webp',
     imageAlt: 'Packaged Lielais Sēklu cookie',
@@ -167,8 +159,7 @@ const productCatalog = [
   {
     id: 'Kokoscitrons',
     name: 'Kokoscitrons',
-    description:
-      'Warm molasses, ginger, and cinnamon baked into a soft cookie with a gentle crunch.',
+    description: '',
     badge: 'Seasonal',
     image: '/media/products/kokoscitrons-pack.webp',
     imageAlt: 'Packaged Kokoscitrons cookie',
@@ -199,17 +190,12 @@ export const allProducts = productCatalog.map((product) => ({ ...product, slug: 
 
 export function getLocalizedProduct(product, language) {
   const details = getProductDetails(product.id);
-  const isUnverifiedDescription = /incorrect placeholder|unverified|missing/i.test(
-    details?.descriptionReviewStatus ?? '',
-  );
   const content = product.content?.[language] ?? product.content?.en;
 
   return {
     ...product,
     ...content,
-    description: isUnverifiedDescription
-      ? ''
-      : (content?.description ?? (language === 'en' ? product.description : '')),
+    description: content?.description ?? (language === 'en' ? product.description : ''),
     imageAlt: content?.imageAlt ?? product.imageAlt,
     images: product.images.map((image) => ({
       ...image,

@@ -65,7 +65,6 @@ function Hero() {
         <div className="hero__content">
           <span className={`hero__eyebrow hero__reveal${titleIn ? ' is-in' : ''}`}>{t('homepage.heroEyebrow')}</span>
           <h1 className={`hero__title hero__reveal${titleIn ? ' is-in' : ''}`}>CEPUMBUMS</h1>
-          <p className={`hero__description hero__reveal${ctaIn ? ' is-in' : ''}`}>{t('homepage.heroDescription')}</p>
           <div className={`hero__actions hero__reveal${ctaIn ? ' is-in' : ''}`}>
             <Link to={localePath('/products')} className="btn btn--primary" tabIndex={ctaIn ? 0 : -1}>
               {t('homepage.heroCta')}
