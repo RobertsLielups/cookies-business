@@ -16,7 +16,6 @@
 .contact .form-success { border-color: rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); color: #fff; }
 .contact__honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .contact__turnstile { width: 100%; }
-.contact__turnstile:empty { display: none; }
 .contact__error { color: #f0a49c; font-size: var(--text-sm); font-weight: 600; }
 .contact__privacy { font-size: var(--text-xs); line-height: 1.5; }
 .contact__form .btn:disabled { cursor: wait; opacity: 0.65; transform: none; }
